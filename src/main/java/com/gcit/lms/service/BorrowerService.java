@@ -13,13 +13,13 @@ public class BorrowerService {
   @Autowired
   BasicDataSource ds;
   @Autowired
-  LoanDAO ldao;
+  BookLoanDAO ldao;
   @Autowired
-  CopiesDAO cdao;
+  BookCopiesDAO cdao;
   @Autowired
   BorrowerDAO borrowerdao;
   @Autowired
-  BranchDAO branchdao;
+  LibraryBranchDAO branchdao;
   @Autowired
   BookDAO bookdao;
 
@@ -31,39 +31,39 @@ public class BorrowerService {
     return ldao.getLoansByCardNoCount(cardNo);
   }
 
-  public List<Branch> getAllBranchesByCardNo(int cardNo) {
-    List<Loan> loans = ldao.getLoansByCardNo(cardNo);
-    List<Branch> branches = new ArrayList<Branch>();
-    for (Loan l : loans) {
-      Branch b = l.getBranch();
-      if (!branches.contains(b)) branches.add(l.getBranch());
+  public List<LibraryBranch> getAllBranchesByCardNo(int cardNo) {
+    List<BookLoan> bookLoen = ldao.getLoansByCardNo(cardNo);
+    List<LibraryBranch> libraryBranches = new ArrayList<LibraryBranch>();
+    for (BookLoan l : bookLoen) {
+      LibraryBranch b = l.getLibraryBranch();
+      if (!libraryBranches.contains(b)) libraryBranches.add(l.getLibraryBranch());
     }
-    return branches;
+    return libraryBranches;
   }
 
   public List<Book> getAllBooksLoanedByCardNoAndBranchId(int cardNo, int branchId, int pageNo, int pageSize) {
-    List<Loan> loans = ldao.getLoansByCardNoAndBranchId(cardNo, branchId, pageNo, pageSize);
+    List<BookLoan> bookLoen = ldao.getLoansByCardNoAndBranchId(cardNo, branchId, pageNo, pageSize);
     List<Book> books = new ArrayList<Book>();
-    for (Loan l : loans) {
+    for (BookLoan l : bookLoen) {
       books.add(l.getBook());
     }
     return books;
   }
 
   @Transactional
-  public boolean checkout(Loan loan) {
-    if (validateLoan(loan)) {
-      Loan l = ldao.getLoanByIds(loan.getBorrower().getCardNo(), loan.getBook().getBookId(), loan.getBranch().getBranchId());
+  public boolean checkout(BookLoan bookLoan) {
+    if (validateLoan(bookLoan)) {
+      BookLoan l = ldao.getLoanByIds(bookLoan.getBorrower().getCardNo(), bookLoan.getBook().getBookId(), bookLoan.getLibraryBranch().getBranchId());
       if (l != null)
         return false;
-      ldao.createLoan(loan);
-      Copies copies = cdao.getCopiesByIds(loan.getBranch().getBranchId(), loan.getBook().getBookId());
-      if (copies.getNoOfCopies() > 1) {
-        copies.setNoOfCopies(copies.getNoOfCopies() - 1);
-        cdao.updateCopies(copies);
+      ldao.createLoan(bookLoan);
+      BookCopies bookCopies = cdao.getCopiesByIds(bookLoan.getLibraryBranch().getBranchId(), bookLoan.getBook().getBookId());
+      if (bookCopies.getNoOfCopies() > 1) {
+        bookCopies.setNoOfCopies(bookCopies.getNoOfCopies() - 1);
+        cdao.updateCopies(bookCopies);
       }
       else {
-        cdao.deleteCopies(copies);
+        cdao.deleteCopies(bookCopies);
       }
       return true;
     }
@@ -71,30 +71,30 @@ public class BorrowerService {
   }
 
   @Transactional
-  public boolean checkin(Loan loan) {
-    if (validateLoan(loan)) {
-      ldao.checkin(loan);
-      Copies copies = cdao.getCopiesByIds(loan.getBranch().getBranchId(), loan.getBook().getBookId());
-      if (copies == null) {
-        copies = new Copies();
-        copies.setBook(loan.getBook());
-        copies.setBranch(loan.getBranch());
-        copies.setNoOfCopies(1);
-        cdao.createCopies(copies);
+  public boolean checkin(BookLoan bookLoan) {
+    if (validateLoan(bookLoan)) {
+      ldao.checkin(bookLoan);
+      BookCopies bookCopies = cdao.getCopiesByIds(bookLoan.getLibraryBranch().getBranchId(), bookLoan.getBook().getBookId());
+      if (bookCopies == null) {
+        bookCopies = new BookCopies();
+        bookCopies.setBook(bookLoan.getBook());
+        bookCopies.setLibraryBranch(bookLoan.getLibraryBranch());
+        bookCopies.setNoOfCopies(1);
+        cdao.createCopies(bookCopies);
       }
       else {
-        copies.setNoOfCopies(copies.getNoOfCopies() + 1);
-        cdao.updateCopies(copies);
+        bookCopies.setNoOfCopies(bookCopies.getNoOfCopies() + 1);
+        cdao.updateCopies(bookCopies);
       }
       return true;
     }
     return false;
   }
 
-  private boolean validateLoan(Loan loan) {
-    if (loan.getBorrower() == null || loan.getBook() == null || loan.getBranch() == null)
+  private boolean validateLoan(BookLoan bookLoan) {
+    if (bookLoan.getBorrower() == null || bookLoan.getBook() == null || bookLoan.getLibraryBranch() == null)
       return false;
-    return !(loan.getBorrower().getCardNo() == 0 || loan.getBook().getBookId() == 0 || loan.getBranch().getBranchId() == 0);
+    return !(bookLoan.getBorrower().getCardNo() == 0 || bookLoan.getBook().getBookId() == 0 || bookLoan.getLibraryBranch().getBranchId() == 0);
 
   }
 
@@ -102,7 +102,7 @@ public class BorrowerService {
     return borrowerdao.getBorrowerById(cardNo);
   }
 
-  public List<Branch> getAllBranches(int pageNo, int pageSize) {
+  public List<LibraryBranch> getAllBranches(int pageNo, int pageSize) {
     return branchdao.getAllBranches(pageNo, pageSize);
   }
 
@@ -111,16 +111,16 @@ public class BorrowerService {
   }
 
   public int getBooksCountByBranchId(int branchId) {
-    List<Copies> copies = cdao.getAllCopiesByBranchId(branchId, -1, 5);
+    List<BookCopies> copies = cdao.getAllCopiesByBranchId(branchId, -1, 5);
     List<Book> books = new ArrayList<Book>();
-    for (Copies c : copies) books.add(bookdao.getBookById(c.getBook().getBookId()));
+    for (BookCopies c : copies) books.add(bookdao.getBookById(c.getBook().getBookId()));
     return books.size();
   }
 
   public List<Book> getAllBooksByBranchId(int branchId, int pageNo, int pageSize) {
-    List<Copies> copies = cdao.getAllCopiesByBranchId(branchId, pageNo, pageSize);
+    List<BookCopies> copies = cdao.getAllCopiesByBranchId(branchId, pageNo, pageSize);
     List<Book> books = new ArrayList<Book>();
-    for (Copies c : copies) {
+    for (BookCopies c : copies) {
       books.add(bookdao.getBookById(c.getBook().getBookId()));
     }
     return books;
@@ -128,27 +128,27 @@ public class BorrowerService {
 
 
   public List<Book> getBooksByTitleAndBranchId(String searchString, int pageNo, int pageSize, int branchId) {
-    List<Copies> copies = cdao.getAllCopiesByTitleAndByBranchId(branchId, pageNo, pageSize, searchString);
+    List<BookCopies> copies = cdao.getAllCopiesByTitleAndByBranchId(branchId, pageNo, pageSize, searchString);
     List<Book> books = new ArrayList<Book>();
-    for (Copies c : copies) {
+    for (BookCopies c : copies) {
       books.add(bookdao.getBookById(c.getBook().getBookId()));
     }
     return books;
   }
 
-  public List<Branch> getBranchesByName(String searchString, int pageNo, int pageSize) {
+  public List<LibraryBranch> getBranchesByName(String searchString, int pageNo, int pageSize) {
     return branchdao.getBranchesByName(searchString, pageNo, pageSize);
   }
 
-  public List<Branch> getBranchesByNameAndCardNo(String searchString, int pageNo, int pageSize, int cardNo) {
+  public List<LibraryBranch> getBranchesByNameAndCardNo(String searchString, int pageNo, int pageSize, int cardNo) {
     return branchdao.getBranchesByNameAndCardNo(searchString, pageNo, pageSize, cardNo);
   }
 
   public List<Book> getAllBooksLoanedByTitleAndCardNoAndBranchId(String searchString, int cardNo, int branchId,
                                                                  int pageNo, int pageSize) {
-    List<Loan> loans = ldao.getLoansByTitleAndCardNoAndBranchId(searchString, cardNo, branchId, pageNo, pageSize);
+    List<BookLoan> bookLoen = ldao.getLoansByTitleAndCardNoAndBranchId(searchString, cardNo, branchId, pageNo, pageSize);
     List<Book> books = new ArrayList<Book>();
-    for (Loan l : loans) {
+    for (BookLoan l : bookLoen) {
       books.add(l.getBook());
     }
     return books;

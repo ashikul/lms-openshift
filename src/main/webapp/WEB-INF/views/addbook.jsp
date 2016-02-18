@@ -3,10 +3,10 @@
 <%@ page import="com.gcit.lms.domain.Author" %>
 <%@ page import="com.gcit.lms.domain.Genre" %>
 <%@ page import="com.gcit.lms.domain.Publisher" %>
-<%@ page import="com.gcit.lms.service.AdministratorService" %>
+<%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
-    AdministratorService service = (AdministratorService) request.getAttribute("service");
+    AdminService service = (AdminService) request.getAttribute("service");
     List<Author> authors = service.getAllAuthors(-1, 5);
     List<Publisher> publishers = service.getAllPublishers(-1, 5);
     List<Genre> genres = service.getAllGenres();

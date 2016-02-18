@@ -37,28 +37,28 @@ public class BorrowerController {
   @RequestMapping(value = "/checkout", method = RequestMethod.GET)
   public String checkout(Locale locale, Model model, @RequestParam(value = "cardNo") Integer cardNo,
                          @RequestParam(value = "branchId") Integer branchId, @RequestParam(value = "bookId") Integer bookId) {
-    Loan loan = new Loan();
+    BookLoan bookLoan = new BookLoan();
     Borrower borrower = new Borrower();
     borrower.setCardNo(cardNo);
-    loan.setBorrower(borrower);
+    bookLoan.setBorrower(borrower);
 
-    Branch branch = new Branch();
-    branch.setBranchId(branchId);
-    loan.setBranch(branch);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchId(branchId);
+    bookLoan.setLibraryBranch(libraryBranch);
 
     Book book = new Book();
     book.setBookId(bookId);
-    loan.setBook(book);
+    bookLoan.setBook(book);
 
     Calendar cal = Calendar.getInstance();
     Date dateOut = new Date(cal.getTime().getTime());
-    loan.setDateOut(dateOut);
+    bookLoan.setDateOut(dateOut);
 
     cal.add(Calendar.DATE, 7);
     Date dueDate = new Date(cal.getTime().getTime());
-    loan.setDueDate(dueDate);
+    bookLoan.setDueDate(dueDate);
 
-    boolean success = service.checkout(loan);
+    boolean success = service.checkout(bookLoan);
     model.addAttribute("message", success ? "Check-out Successfully" : "Failed to Check-out");
     return "signin";
   }
@@ -67,7 +67,7 @@ public class BorrowerController {
   @ResponseBody
   public String searchCheckoutBranches(Locale locale, Model model, @RequestParam(value = "searchString") String searchString) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByName(searchString, -1, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, -1, 5);
     int count = lst.size();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
@@ -83,10 +83,10 @@ public class BorrowerController {
   public String pageCheckoutBranches(Locale locale, Model model, @RequestParam(value = "searchString") String searchString,
                                      @RequestParam(value = "pageNo") int pageNo, @RequestParam(value = "cardNo") Integer cardNo) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByName(searchString, pageNo, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, pageNo, 5);
     StringBuilder sb = new StringBuilder();
     sb.append("<tr><th>Name</th><th>Address</th></tr>");
-    for (Branch b : lst) {
+    for (LibraryBranch b : lst) {
       sb.append("<tr><td>" + b.getBranchName() + "</td>"
           + "<td>" + b.getBranchAddress() + "</td><td><button type='button' class='btn btn btn-info' "
           + "onclick=\"javascript:location.href='checkoutbook?cardNo=" + cardNo
@@ -149,20 +149,20 @@ public class BorrowerController {
   @RequestMapping(value = "/checkin", method = RequestMethod.GET)
   public String checkin(Locale locale, Model model, @RequestParam(value = "cardNo") Integer cardNo,
                         @RequestParam(value = "branchId") Integer branchId, @RequestParam(value = "bookId") Integer bookId) {
-    Loan loan = new Loan();
+    BookLoan bookLoan = new BookLoan();
     Borrower borrower = new Borrower();
     borrower.setCardNo(cardNo);
-    loan.setBorrower(borrower);
+    bookLoan.setBorrower(borrower);
 
-    Branch branch = new Branch();
-    branch.setBranchId(branchId);
-    loan.setBranch(branch);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchId(branchId);
+    bookLoan.setLibraryBranch(libraryBranch);
 
     Book book = new Book();
     book.setBookId(bookId);
-    loan.setBook(book);
+    bookLoan.setBook(book);
 
-    boolean success = service.checkin(loan);
+    boolean success = service.checkin(bookLoan);
     model.addAttribute("message", success ? "Check-in Successfully" : "Failed to Check-in");
     return "signin";
   }
@@ -172,7 +172,7 @@ public class BorrowerController {
   public String searchCheckinBranches(Locale locale, Model model, @RequestParam(value = "searchString") String searchString,
                                       @RequestParam(value = "cardNo") Integer cardNo) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByNameAndCardNo(searchString, -1, 5, cardNo);
+    List<LibraryBranch> lst = service.getBranchesByNameAndCardNo(searchString, -1, 5, cardNo);
     int count = lst.size();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
@@ -188,10 +188,10 @@ public class BorrowerController {
   public String pageCheckinBranches(Locale locale, Model model, @RequestParam(value = "searchString") String searchString,
                                     @RequestParam(value = "pageNo") int pageNo, @RequestParam(value = "cardNo") Integer cardNo) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByNameAndCardNo(searchString, pageNo, 5, cardNo);
+    List<LibraryBranch> lst = service.getBranchesByNameAndCardNo(searchString, pageNo, 5, cardNo);
     StringBuilder sb = new StringBuilder();
     sb.append("<tr><th>Name</th><th>Address</th></tr>");
-    for (Branch b : lst) {
+    for (LibraryBranch b : lst) {
       sb.append("<tr><td>" + b.getBranchName() + "</td>"
           + "<td>" + b.getBranchAddress() + "</td><td><button type='button' class='btn btn btn-info' "
           + "onclick=\"javascript:location.href='checkinbook?cardNo=" + cardNo + "&branchId=" + b.getBranchId() + "'\">Choose</button></td></tr>");

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="com.gcit.lms.domain.Borrower" %>
-<%@ page import="com.gcit.lms.service.AdministratorService" %>
+<%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
-    AdministratorService service = (AdministratorService) request.getAttribute("service");
+    AdminService service = (AdminService) request.getAttribute("service");
     int count = service.getBorrowersCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;

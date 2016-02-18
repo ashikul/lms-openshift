@@ -2,8 +2,8 @@ package com.gcit.lms.service;
 
 import com.gcit.lms.dao.*;
 import com.gcit.lms.domain.Book;
-import com.gcit.lms.domain.Branch;
-import com.gcit.lms.domain.Copies;
+import com.gcit.lms.domain.BookCopies;
+import com.gcit.lms.domain.LibraryBranch;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +18,15 @@ public class LibrarianService {
   @Autowired
   BookDAO bookdao;
   @Autowired
-  BranchDAO branchdao;
+  LibraryBranchDAO branchdao;
   @Autowired
   PublisherDAO pdao;
   @Autowired
   GenreDAO gdao;
   @Autowired
-  CopiesDAO cdao;
+  BookCopiesDAO cdao;
 
-  public Branch getBranchById(int branchId) {
+  public LibraryBranch getBranchById(int branchId) {
     return branchdao.getBranchById(branchId);
   }
 
@@ -34,11 +34,11 @@ public class LibrarianService {
     return bookdao.getBookById(bookId);
   }
 
-  public List<Branch> getBranchesByName(String searchString, int pageNo, int pageSize) {
+  public List<LibraryBranch> getBranchesByName(String searchString, int pageNo, int pageSize) {
     return branchdao.getBranchesByName(searchString, pageNo, pageSize);
   }
 
-  public List<Branch> getAllBranches(int pageNo, int pageSize) {
+  public List<LibraryBranch> getAllBranches(int pageNo, int pageSize) {
     return branchdao.getAllBranches(pageNo, pageSize);
   }
 
@@ -59,36 +59,36 @@ public class LibrarianService {
   }
 
   @Transactional
-  public boolean updateCopies(Copies copies) {
-    if (validateCopies(copies)) {
-      cdao.updateCopies(copies);
+  public boolean updateCopies(BookCopies bookCopies) {
+    if (validateCopies(bookCopies)) {
+      cdao.updateCopies(bookCopies);
       return true;
     }
     return false;
   }
 
-  public Copies getCopiesByIds(int branchId, int bookId) {
+  public BookCopies getCopiesByIds(int branchId, int bookId) {
     return cdao.getCopiesByIds(branchId, bookId);
   }
 
   @Transactional
-  public boolean createCopies(Copies copies) {
-    if (validateCopies(copies)) {
-      cdao.createCopies(copies);
+  public boolean createCopies(BookCopies bookCopies) {
+    if (validateCopies(bookCopies)) {
+      cdao.createCopies(bookCopies);
       return true;
     }
     return false;
   }
 
   @Transactional
-  public void deleteCopies(Copies copies) {
-    cdao.deleteCopies(copies);
+  public void deleteCopies(BookCopies bookCopies) {
+    cdao.deleteCopies(bookCopies);
   }
 
-  private boolean validateCopies(Copies copies) {
-    if (copies.getBook() == null || copies.getBranch() == null)
+  private boolean validateCopies(BookCopies bookCopies) {
+    if (bookCopies.getBook() == null || bookCopies.getLibraryBranch() == null)
       return false;
-    return !(copies.getBook().getBookId() == 0 || copies.getBranch().getBranchId() == 0);
+    return !(bookCopies.getBook().getBookId() == 0 || bookCopies.getLibraryBranch().getBranchId() == 0);
 
   }
 }

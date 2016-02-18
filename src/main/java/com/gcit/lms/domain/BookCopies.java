@@ -2,13 +2,13 @@ package com.gcit.lms.domain;
 
 import java.io.Serializable;
 
-public class Copies implements Serializable {
+public class BookCopies implements Serializable {
   /**
    *
    */
   private static final long serialVersionUID = -4204664396298869548L;
   private Book book;
-  private Branch branch;
+  private LibraryBranch libraryBranch;
   private int noOfCopies;
 
   /**
@@ -26,17 +26,17 @@ public class Copies implements Serializable {
   }
 
   /**
-   * @return the branch
+   * @return the libraryBranch
    */
-  public Branch getBranch() {
-    return branch;
+  public LibraryBranch getLibraryBranch() {
+    return libraryBranch;
   }
 
   /**
-   * @param branch the branch to set
+   * @param libraryBranch the libraryBranch to set
    */
-  public void setBranch(Branch branch) {
-    this.branch = branch;
+  public void setLibraryBranch(LibraryBranch libraryBranch) {
+    this.libraryBranch = libraryBranch;
   }
 
   /**
@@ -61,7 +61,7 @@ public class Copies implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((book == null) ? 0 : book.hashCode());
-    result = prime * result + ((branch == null) ? 0 : branch.hashCode());
+    result = prime * result + ((libraryBranch == null) ? 0 : libraryBranch.hashCode());
     result = prime * result + noOfCopies;
     return result;
   }
@@ -77,18 +77,18 @@ public class Copies implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Copies other = (Copies) obj;
+    BookCopies other = (BookCopies) obj;
     if (book == null) {
       if (other.book != null)
         return false;
     }
     else if (!book.equals(other.book))
       return false;
-    if (branch == null) {
-      if (other.branch != null)
+    if (libraryBranch == null) {
+      if (other.libraryBranch != null)
         return false;
     }
-    else if (!branch.equals(other.branch))
+    else if (!libraryBranch.equals(other.libraryBranch))
       return false;
     return noOfCopies == other.noOfCopies;
   }

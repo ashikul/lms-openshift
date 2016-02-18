@@ -13,14 +13,14 @@
     <table>
         <tr>
             <td>Enter New Name:</td>
-            <td><input type="text" name="name" value="${branch.getBranchName()}"></td>
+            <td><input type="text" name="name" value="${libraryBranch.getBranchName()}"></td>
         </tr>
         <tr>
             <td>Enter New Address:</td>
-            <td><input type="text" name="address" value="${branch.getBranchAddress()}"></td>
+            <td><input type="text" name="address" value="${libraryBranch.getBranchAddress()}"></td>
         </tr>
     </table>
-    <input type="hidden" name="id" value="${branch.getBranchId()}">
+    <input type="hidden" name="id" value="${libraryBranch.getBranchId()}">
     <input type="hidden" name="forward"
            value=<%= request.getParameter("forward") == null ? "" : request.getParameter("forward")%>>
     <input type="submit" value="Submit">

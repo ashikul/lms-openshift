@@ -6,7 +6,7 @@
         <h1>Welcome Librarian</h1>
         <h2>Pick your option:</h2>
         <ul class="nav nav-pills nav-stacked">
-            <li><a href="listbranches">View list of library branches</a></li>
+            <li><a href="listbranches">View list of library libraryBranches</a></li>
         </ul>
     </div>
 </div>

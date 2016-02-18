@@ -1,7 +1,7 @@
 package com.gcit.lms;
 
 import com.gcit.lms.domain.*;
-import com.gcit.lms.service.AdministratorService;
+import com.gcit.lms.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class AdminController {
   @SuppressWarnings("unused")
   private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
   @Autowired
-  AdministratorService service;
+  AdminService service;
 
   @RequestMapping(value = "/addAuthor", method = RequestMethod.POST)
   public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName") String name) {
@@ -308,12 +308,12 @@ public class AdminController {
   @RequestMapping(value = "/addBranch", method = RequestMethod.POST)
   public String addBranch(Locale locale, Model model, @RequestParam(value = "name") String name,
                           @RequestParam(value = "address") String address) {
-    Branch branch = new Branch();
-    branch.setBranchName(name);
-    branch.setBranchAddress(address);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchName(name);
+    libraryBranch.setBranchAddress(address);
 
-    boolean success = service.createBranch(branch);
-    model.addAttribute("message", success ? "Branch Added Sucessfully" : "Failed to Add Branch");
+    boolean success = service.createBranch(libraryBranch);
+    model.addAttribute("message", success ? "LibraryBranch Added Sucessfully" : "Failed to Add LibraryBranch");
     return "branches";
   }
 
@@ -327,13 +327,13 @@ public class AdminController {
     }
     else {
       model.addAttribute("service", service);
-      Branch branch = new Branch();
-      branch.setBranchId(id);
-      branch.setBranchName(name);
-      branch.setBranchAddress(address);
+      LibraryBranch libraryBranch = new LibraryBranch();
+      libraryBranch.setBranchId(id);
+      libraryBranch.setBranchName(name);
+      libraryBranch.setBranchAddress(address);
 
-      boolean success = service.updateBranch(branch);
-      model.addAttribute("message", success ? "Branch Edited Sucessfully" : "Failed to Edit Branch");
+      boolean success = service.updateBranch(libraryBranch);
+      model.addAttribute("message", success ? "LibraryBranch Edited Sucessfully" : "Failed to Edit LibraryBranch");
       if (forward.equals(""))
         return "viewbranches";
       else
@@ -344,10 +344,10 @@ public class AdminController {
   @RequestMapping(value = "/deleteBranch", method = RequestMethod.GET)
   public String deleteBranch(Locale locale, Model model, @RequestParam(value = "id") int id) {
     model.addAttribute("service", service);
-    Branch branch = new Branch();
-    branch.setBranchId(id);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchId(id);
 
-    service.deleteBranch(branch);
+    service.deleteBranch(libraryBranch);
     return "viewbranches";
   }
 
@@ -355,7 +355,7 @@ public class AdminController {
   @ResponseBody
   public String searchBranch(Locale locale, Model model, @RequestParam(value = "searchString") String searchString) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByName(searchString, -1, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, -1, 5);
     int count = lst.size();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
@@ -371,10 +371,10 @@ public class AdminController {
   public String pageBranch(Locale locale, Model model, @RequestParam(value = "searchString") String searchString,
                            @RequestParam(value = "pageNo") int pageNo) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByName(searchString, pageNo, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, pageNo, 5);
     StringBuilder sb = new StringBuilder();
     sb.append("<tr><th>Name</th><th>Address</th></tr>");
-    for (Branch b : lst) {
+    for (LibraryBranch b : lst) {
       sb.append("<tr><td>" + b.getBranchName() + "</td>"
           + "<td>" + b.getBranchAddress() + "</td>"
           + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' data-target='#myModal1' "
@@ -469,19 +469,19 @@ public class AdminController {
   public String overrideLoan(Locale locale, Model model, @RequestParam(value = "bookId") Integer bookId,
                              @RequestParam(value = "branchId") Integer branchId, @RequestParam(value = "cardNo") Integer cardNo,
                              @RequestParam(value = "dateOut") java.sql.Date dateOut, @RequestParam(value = "dueDate") java.sql.Date dueDate) {
-    Loan loan = new Loan();
+    BookLoan bookLoan = new BookLoan();
     Book book = new Book();
     book.setBookId(bookId);
-    loan.setBook(book);
-    Branch branch = new Branch();
-    branch.setBranchId(branchId);
-    loan.setBranch(branch);
+    bookLoan.setBook(book);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchId(branchId);
+    bookLoan.setLibraryBranch(libraryBranch);
     Borrower borrower = new Borrower();
     borrower.setCardNo(cardNo);
-    loan.setBorrower(borrower);
-    loan.setDateOut(dateOut);
-    loan.setDueDate(dueDate);
-    model.addAttribute("loan", loan);
+    bookLoan.setBorrower(borrower);
+    bookLoan.setDateOut(dateOut);
+    bookLoan.setDueDate(dueDate);
+    model.addAttribute("loan", bookLoan);
     return "overrideloan";
   }
 
@@ -489,24 +489,24 @@ public class AdminController {
   public String override(Locale locale, Model model, @RequestParam(value = "bookId") Integer bookId,
                          @RequestParam(value = "branchId") Integer branchId, @RequestParam(value = "cardNo") Integer cardNo,
                          @RequestParam(value = "dateOut") java.sql.Date dateOut, @RequestParam(value = "dueDate") java.sql.Date dueDate) {
-    Loan loan = new Loan();
+    BookLoan bookLoan = new BookLoan();
     Borrower borrower = new Borrower();
     borrower.setCardNo(cardNo);
-    loan.setBorrower(borrower);
+    bookLoan.setBorrower(borrower);
 
     Book book = new Book();
     book.setBookId(bookId);
-    loan.setBook(book);
+    bookLoan.setBook(book);
 
-    Branch branch = new Branch();
-    branch.setBranchId(branchId);
-    loan.setBranch(branch);
+    LibraryBranch libraryBranch = new LibraryBranch();
+    libraryBranch.setBranchId(branchId);
+    bookLoan.setLibraryBranch(libraryBranch);
 
-    loan.setDateOut(dateOut);
-    loan.setDueDate(dueDate);
+    bookLoan.setDateOut(dateOut);
+    bookLoan.setDueDate(dueDate);
 
-    boolean success = service.updateLoan(loan);
-    model.addAttribute("message", success ? "Overridden Loan Sucessfully" : "Failed to Override Loan");
+    boolean success = service.updateLoan(bookLoan);
+    model.addAttribute("message", success ? "Overridden BookLoan Sucessfully" : "Failed to Override BookLoan");
     model.addAttribute("service", service);
     return "loans";
   }
@@ -515,7 +515,7 @@ public class AdminController {
   @ResponseBody
   public String searchLoan(Locale locale, Model model, @RequestParam(value = "searchString") String searchString) {
     searchString = "%" + searchString + "%";
-    List<Loan> lst = service.getLoansByDueDate(searchString, -1, 5);
+    List<BookLoan> lst = service.getLoansByDueDate(searchString, -1, 5);
     int count = lst.size();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
@@ -531,17 +531,17 @@ public class AdminController {
   public String pageLoan(Locale locale, Model model, @RequestParam(value = "searchString") String searchString,
                          @RequestParam(value = "pageNo") int pageNo) {
     searchString = "%" + searchString + "%";
-    List<Loan> lst = service.getLoansByDueDate(searchString, pageNo, 5);
+    List<BookLoan> lst = service.getLoansByDueDate(searchString, pageNo, 5);
     StringBuilder sb = new StringBuilder();
-    sb.append("<tr><th>Borrower Name</th><th>Book Title</th><th>Branch Name</th>"
-        + "<th>Branch Address</th><th>Date Out</th><th>Due Date</th></tr>");
-    for (Loan l : lst) {
+    sb.append("<tr><th>Borrower Name</th><th>Book Title</th><th>LibraryBranch Name</th>"
+        + "<th>LibraryBranch Address</th><th>Date Out</th><th>Due Date</th></tr>");
+    for (BookLoan l : lst) {
       sb.append("<tr><td>" + l.getBorrower().getName() + "</td><td>" + l.getBook().getTitle() + "</td>"
-          + "<td>" + l.getBranch().getBranchName() + "</td><td>" + l.getBranch().getBranchAddress() + "</td>"
+          + "<td>" + l.getLibraryBranch().getBranchName() + "</td><td>" + l.getLibraryBranch().getBranchAddress() + "</td>"
           + "<td>" + l.getDateOut().toString() + "</td><td>" + l.getDueDate().toString() + "</td>"
           + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' "
           + "data-target='#myModal1' href='overrideloan?bookId=" + l.getBook().getBookId()
-          + "&branchId=" + l.getBranch().getBranchId() + "&cardNo=" + l.getBorrower().getCardNo()
+          + "&branchId=" + l.getLibraryBranch().getBranchId() + "&cardNo=" + l.getBorrower().getCardNo()
           + "&dateOut=" + l.getDateOut().toString() + "&dueDate=" + l.getDueDate().toString() + "'>OVERRIDE</button></td></tr>");
     }
     return sb.toString();

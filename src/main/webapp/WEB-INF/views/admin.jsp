@@ -10,10 +10,10 @@
             <li><a href="books">Add/Update/Delete/View Books</a></li>
             <li><a href="publishers">Add/Update/Delete/View
                 Publishers</a></li>
-            <li><a href="branches">Add/Update/Delete/View Library
+            <li><a href="libraryBranches">Add/Update/Delete/View Library
                 Branches</a></li>
             <li><a href="borrowers">Add/Update/Delete/View Borrowers</a></li>
-            <li><a href="loans">Over-ride Due Date for a Book Loan</a></li>
+            <li><a href="bookLoen">Over-ride Due Date for a Book Loan</a></li>
         </ul>
     </div>
 </div>

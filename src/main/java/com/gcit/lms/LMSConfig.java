@@ -1,7 +1,7 @@
 package com.gcit.lms;
 
 import com.gcit.lms.dao.*;
-import com.gcit.lms.service.AdministratorService;
+import com.gcit.lms.service.AdminService;
 import com.gcit.lms.service.BorrowerService;
 import com.gcit.lms.service.LibrarianService;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -23,8 +23,8 @@ public class LMSConfig {
 
   /* Add Services */
   @Bean
-  AdministratorService adminService() {
-    return new AdministratorService();
+  AdminService adminService() {
+    return new AdminService();
   }
 
   @Bean
@@ -54,13 +54,13 @@ public class LMSConfig {
   }
 
   @Bean
-  public BranchDAO branchDAO() {
-    return new BranchDAO();
+  public LibraryBranchDAO branchDAO() {
+    return new LibraryBranchDAO();
   }
 
   @Bean
-  public CopiesDAO copiesDAO() {
-    return new CopiesDAO();
+  public BookCopiesDAO copiesDAO() {
+    return new BookCopiesDAO();
   }
 
   @Bean
@@ -69,8 +69,8 @@ public class LMSConfig {
   }
 
   @Bean
-  public LoanDAO loanDAO() {
-    return new LoanDAO();
+  public BookLoanDAO loanDAO() {
+    return new BookLoanDAO();
   }
 
   @Bean

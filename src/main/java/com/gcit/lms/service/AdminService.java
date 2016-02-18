@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class AdministratorService {
+public class AdminService {
 
   @Autowired
   BasicDataSource ds;
@@ -17,7 +17,7 @@ public class AdministratorService {
   @Autowired
   BookDAO bookdao;
   @Autowired
-  BranchDAO branchdao;
+  LibraryBranchDAO branchdao;
   @Autowired
   BorrowerDAO borrowerdao;
   @Autowired
@@ -25,32 +25,32 @@ public class AdministratorService {
   @Autowired
   GenreDAO gdao;
   @Autowired
-  LoanDAO ldao;
+  BookLoanDAO ldao;
 
 
-  public List<Loan> getLoansByDueDate(String searchString, int pageNo, int pageSize) {
+  public List<BookLoan> getLoansByDueDate(String searchString, int pageNo, int pageSize) {
     return ldao.getLoansByDueDate(searchString, pageNo, pageSize);
   }
 
   @Transactional
-  public boolean updateLoan(Loan loan) {
-    if (validateLoan(loan)) {
-      ldao.updateLoan(loan);
+  public boolean updateLoan(BookLoan bookLoan) {
+    if (validateLoan(bookLoan)) {
+      ldao.updateLoan(bookLoan);
       return true;
     }
     return false;
   }
 
-  public List<Loan> getAllLoans(int pageNo, int pageSize) {
+  public List<BookLoan> getAllLoans(int pageNo, int pageSize) {
     return ldao.getAllLoans(pageNo, pageSize);
   }
 
-  private boolean validateLoan(Loan loan) {
-    if (loan.getBorrower() == null || loan.getBook() == null || loan.getBranch() == null)
+  private boolean validateLoan(BookLoan bookLoan) {
+    if (bookLoan.getBorrower() == null || bookLoan.getBook() == null || bookLoan.getLibraryBranch() == null)
       return false;
-    if (loan.getBorrower().getCardNo() == 0 || loan.getBook().getBookId() == 0 || loan.getBranch().getBranchId() == 0)
+    if (bookLoan.getBorrower().getCardNo() == 0 || bookLoan.getBook().getBookId() == 0 || bookLoan.getLibraryBranch().getBranchId() == 0)
       return false;
-    return !(loan.getDateOut() == null || loan.getDueDate() == null);
+    return !(bookLoan.getDateOut() == null || bookLoan.getDueDate() == null);
 
   }
 
@@ -111,9 +111,9 @@ public class AdministratorService {
   }
 
   @Transactional
-  public boolean createBranch(Branch branch) {
-    if (validateBranch(branch)) {
-      branchdao.createBranch(branch);
+  public boolean createBranch(LibraryBranch libraryBranch) {
+    if (validateBranch(libraryBranch)) {
+      branchdao.createBranch(libraryBranch);
       return true;
     }
     return false;
@@ -124,37 +124,37 @@ public class AdministratorService {
   }
 
   @Transactional
-  public void deleteBranch(Branch branch) {
-    branchdao.deleteBranch(branch);
+  public void deleteBranch(LibraryBranch libraryBranch) {
+    branchdao.deleteBranch(libraryBranch);
   }
 
   @Transactional
-  public boolean updateBranch(Branch branch) {
-    if (validateBranch(branch)) {
-      branchdao.updateBranch(branch);
+  public boolean updateBranch(LibraryBranch libraryBranch) {
+    if (validateBranch(libraryBranch)) {
+      branchdao.updateBranch(libraryBranch);
       return true;
     }
     return false;
   }
 
-  public Branch getBranchById(int branchId) {
+  public LibraryBranch getBranchById(int branchId) {
     return branchdao.getBranchById(branchId);
   }
 
-  public List<Branch> getBranchesByName(String searchString, int pageNo, int pageSize) {
+  public List<LibraryBranch> getBranchesByName(String searchString, int pageNo, int pageSize) {
     return branchdao.getBranchesByName(searchString, pageNo, pageSize);
   }
 
-  public List<Branch> getAllBranches(int pageNo, int pageSize) {
+  public List<LibraryBranch> getAllBranches(int pageNo, int pageSize) {
     return branchdao.getAllBranches(pageNo, pageSize);
   }
 
-  private boolean validateBranch(Branch branch) {
-    if (branch.getBranchName() == null || branch.getBranchAddress() == null)
+  private boolean validateBranch(LibraryBranch libraryBranch) {
+    if (libraryBranch.getBranchName() == null || libraryBranch.getBranchAddress() == null)
       return false;
-    if (branch.getBranchName().length() > 45 || branch.getBranchAddress().length() > 45)
+    if (libraryBranch.getBranchName().length() > 45 || libraryBranch.getBranchAddress().length() > 45)
       return false;
-    return !(branch.getBranchName().matches("\\s*") || branch.getBranchAddress().matches("\\s*"));
+    return !(libraryBranch.getBranchName().matches("\\s*") || libraryBranch.getBranchAddress().matches("\\s*"));
 
   }
 

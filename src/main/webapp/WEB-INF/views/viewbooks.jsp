@@ -3,10 +3,10 @@
 <%@ page import="com.gcit.lms.domain.Author" %>
 <%@ page import="com.gcit.lms.domain.Book" %>
 <%@ page import="com.gcit.lms.domain.Genre" %>
-<%@ page import="com.gcit.lms.service.AdministratorService" %>
+<%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
-    AdministratorService service = (AdministratorService) request.getAttribute("service");
+    AdminService service = (AdminService) request.getAttribute("service");
     int count = service.getBooksCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;

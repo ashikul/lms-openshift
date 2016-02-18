@@ -1,6 +1,6 @@
 package com.gcit.lms;
 
-import com.gcit.lms.service.AdministratorService;
+import com.gcit.lms.service.AdminService;
 import com.gcit.lms.service.BorrowerService;
 import com.gcit.lms.service.LibrarianService;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import java.util.Locale;
 public class HomeController {
   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
   @Autowired
-  AdministratorService adminService;
+  AdminService adminService;
   @Autowired
   LibrarianService libService;
   @Autowired
@@ -105,7 +105,7 @@ public class HomeController {
     return "viewpublishers";
   }
 
-  /*Branch*/
+  /*LibraryBranch*/
   @RequestMapping(value = "/branches", method = RequestMethod.GET)
   public String branches(Locale locale, Model model) {
     return "branches";
@@ -141,7 +141,7 @@ public class HomeController {
     return "viewborrowers";
   }
 
-  /*Loan*/
+  /*BookLoan*/
   @RequestMapping(value = "/loans", method = RequestMethod.GET)
   public String loans(Locale locale, Model model) {
     model.addAttribute("service", adminService);

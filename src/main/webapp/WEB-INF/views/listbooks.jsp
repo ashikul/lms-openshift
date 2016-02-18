@@ -57,9 +57,9 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>View Existing Books</h1>
-        <h2>Pick the Book you want to add copies of, to your branch:</h2>
+        <h2>Pick the Book you want to add bookCopies of, to your libraryBranch:</h2>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter branch name to search"> <input
+               placeholder="Enter libraryBranch name to search"> <input
             type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>

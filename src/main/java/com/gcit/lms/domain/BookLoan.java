@@ -3,14 +3,14 @@ package com.gcit.lms.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Loan implements Serializable {
+public class BookLoan implements Serializable {
   /**
    *
    */
   private static final long serialVersionUID = -53194864434024810L;
   private Borrower borrower;
   private Book book;
-  private Branch branch;
+  private LibraryBranch libraryBranch;
   private Date dateOut;
   private Date dueDate;
   private Date dateIn;
@@ -44,17 +44,17 @@ public class Loan implements Serializable {
   }
 
   /**
-   * @return the branch
+   * @return the libraryBranch
    */
-  public Branch getBranch() {
-    return branch;
+  public LibraryBranch getLibraryBranch() {
+    return libraryBranch;
   }
 
   /**
-   * @param branch the branch to set
+   * @param libraryBranch the libraryBranch to set
    */
-  public void setBranch(Branch branch) {
-    this.branch = branch;
+  public void setLibraryBranch(LibraryBranch libraryBranch) {
+    this.libraryBranch = libraryBranch;
   }
 
   /**
@@ -108,7 +108,7 @@ public class Loan implements Serializable {
     int result = 1;
     result = prime * result + ((book == null) ? 0 : book.hashCode());
     result = prime * result + ((borrower == null) ? 0 : borrower.hashCode());
-    result = prime * result + ((branch == null) ? 0 : branch.hashCode());
+    result = prime * result + ((libraryBranch == null) ? 0 : libraryBranch.hashCode());
     result = prime * result + ((dateIn == null) ? 0 : dateIn.hashCode());
     result = prime * result + ((dateOut == null) ? 0 : dateOut.hashCode());
     result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
@@ -126,7 +126,7 @@ public class Loan implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Loan other = (Loan) obj;
+    BookLoan other = (BookLoan) obj;
     if (book == null) {
       if (other.book != null)
         return false;
@@ -139,11 +139,11 @@ public class Loan implements Serializable {
     }
     else if (!borrower.equals(other.borrower))
       return false;
-    if (branch == null) {
-      if (other.branch != null)
+    if (libraryBranch == null) {
+      if (other.libraryBranch != null)
         return false;
     }
-    else if (!branch.equals(other.branch))
+    else if (!libraryBranch.equals(other.libraryBranch))
       return false;
     if (dateIn == null) {
       if (other.dateIn != null)

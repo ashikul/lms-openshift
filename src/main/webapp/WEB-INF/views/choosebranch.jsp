@@ -20,7 +20,7 @@
                 the details of the Library</a></li>
             <li><a
                     href="listbooks?branchId=<%=request.getParameter("id")%>">Add
-                copies of Book to the Branch</a></li>
+                bookCopies of Book to the Branch</a></li>
             <li><a href="listbranches">Quit to previous</a></li>
         </ul>
         <p>${message}</p>

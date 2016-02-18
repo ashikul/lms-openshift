@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.Loan" %>
-<%@ page import="com.gcit.lms.service.AdministratorService" %>
+<%@ page import="com.gcit.lms.domain.BookLoan" %>
+<%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
-    AdministratorService service = (AdministratorService) request.getAttribute("service");
+    AdminService service = (AdminService) request.getAttribute("service");
     int count = service.getLoansCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<Loan> lst = service.getAllLoans(1, 5);
+    List<BookLoan> lst = service.getAllLoans(1, 5);
 %>
 <%@include file="template.html" %>
 <script>
@@ -57,16 +57,16 @@
                 <th>Due Date</th>
             </tr>
             <%
-                for (Loan l : lst) {
+                for (BookLoan l : lst) {
             %>
             <tr>
                 <td><%=l.getBorrower().getName()%>
                 </td>
                 <td><%=l.getBook().getTitle()%>
                 </td>
-                <td><%=l.getBranch().getBranchName()%>
+                <td><%=l.getLibraryBranch().getBranchName()%>
                 </td>
-                <td><%=l.getBranch().getBranchAddress()%>
+                <td><%=l.getLibraryBranch().getBranchAddress()%>
                 </td>
                 <td><%=l.getDateOut().toString()%>
                 </td>
@@ -75,7 +75,7 @@
                 <td>
                     <button type="button" class="btn btn btn-primary"
                             data-toggle="modal" data-target="#myModal1"
-                            href="overrideloan?bookId=<%=l.getBook().getBookId()%>&branchId=<%=l.getBranch().getBranchId()%>&cardNo=<%=l.getBorrower().getCardNo()%>&dateOut=<%=l.getDateOut().toString()%>&dueDate=<%=l.getDueDate().toString()%>">
+                            href="overrideloan?bookId=<%=l.getBook().getBookId()%>&branchId=<%=l.getLibraryBranch().getBranchId()%>&cardNo=<%=l.getBorrower().getCardNo()%>&dateOut=<%=l.getDateOut().toString()%>&dueDate=<%=l.getDueDate().toString()%>">
                         OVERRIDE
                     </button>
                 </td>

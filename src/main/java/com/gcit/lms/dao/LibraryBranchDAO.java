@@ -1,6 +1,6 @@
 package com.gcit.lms.dao;
 
-import com.gcit.lms.domain.Branch;
+import com.gcit.lms.domain.LibraryBranch;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
@@ -8,47 +8,47 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchDAO extends BaseDAO implements ResultSetExtractor<List<Branch>> {
+public class LibraryBranchDAO extends BaseDAO implements ResultSetExtractor<List<LibraryBranch>> {
 
-  public void createBranch(Branch branch) {
+  public void createBranch(LibraryBranch libraryBranch) {
     template.update("insert into tbl_library_branch (branchName, branchAddress) values (?, ?)",
-        branch.getBranchName(), branch.getBranchAddress());
+        libraryBranch.getBranchName(), libraryBranch.getBranchAddress());
   }
 
-  public void updateBranch(Branch branch) {
+  public void updateBranch(LibraryBranch libraryBranch) {
     template.update("update tbl_library_branch set branchName = ?, branchAddress = ? where branchId = ?",
-        branch.getBranchName(), branch.getBranchAddress(), branch.getBranchId());
+        libraryBranch.getBranchName(), libraryBranch.getBranchAddress(), libraryBranch.getBranchId());
   }
 
-  public void deleteBranch(Branch branch) {
+  public void deleteBranch(LibraryBranch libraryBranch) {
     template.update("delete from tbl_library_branch where branchId = ?",
-        branch.getBranchId());
+        libraryBranch.getBranchId());
   }
 
-  public List<Branch> getAllBranches(int pageNo, int pageSize) {
+  public List<LibraryBranch> getAllBranches(int pageNo, int pageSize) {
     setPageNo(pageNo);
     setPageSize(pageSize);
     return template.query(addLimit("select * from tbl_library_branch"), this);
   }
 
-  public Branch getBranchById(int branchId) {
-    List<Branch> branchs = template.query("select * from tbl_library_branch where branchId = ?",
+  public LibraryBranch getBranchById(int branchId) {
+    List<LibraryBranch> libraryBranches = template.query("select * from tbl_library_branch where branchId = ?",
         new Object[]{branchId}, this);
 
-    if (branchs != null && branchs.size() > 0) {
-      return branchs.get(0);
+    if (libraryBranches != null && libraryBranches.size() > 0) {
+      return libraryBranches.get(0);
     }
     return null;
   }
 
-  public List<Branch> getBranchesByName(String searchString, int pageNo, int pageSize) {
+  public List<LibraryBranch> getBranchesByName(String searchString, int pageNo, int pageSize) {
     setPageNo(pageNo);
     setPageSize(pageSize);
     return template.query(addLimit("select * from tbl_library_branch where branchName like ?"),
         new Object[]{searchString}, this);
   }
 
-  public List<Branch> getBranchesByNameAndCardNo(String searchString, int pageNo, int pageSize, int cardNo) {
+  public List<LibraryBranch> getBranchesByNameAndCardNo(String searchString, int pageNo, int pageSize, int cardNo) {
     setPageNo(pageNo);
     setPageSize(pageSize);
     return template.query(addLimit("select distinct t1.* from tbl_library_branch t1 join tbl_book_loans t2 on t1.branchId = t2.branchId "
@@ -61,22 +61,22 @@ public class BranchDAO extends BaseDAO implements ResultSetExtractor<List<Branch
   }
 
   @Override
-  public List<Branch> extractData(ResultSet rs) {
-    List<Branch> branchs = new ArrayList<Branch>();
+  public List<LibraryBranch> extractData(ResultSet rs) {
+    List<LibraryBranch> libraryBranches = new ArrayList<LibraryBranch>();
 
     try {
       while (rs.next()) {
-        Branch b = new Branch();
+        LibraryBranch b = new LibraryBranch();
         b.setBranchId(rs.getInt("branchId"));
         b.setBranchName(rs.getString("branchName"));
         b.setBranchAddress(rs.getString("branchAddress"));
 
-        branchs.add(b);
+        libraryBranches.add(b);
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
 
-    return branchs;
+    return libraryBranches;
   }
 }

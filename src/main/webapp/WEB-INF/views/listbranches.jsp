@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.Branch" %>
+<%@ page import="com.gcit.lms.domain.LibraryBranch" %>
 <%@ page import="com.gcit.lms.service.LibrarianService" %>
 <%@ page import="java.util.List" %>
 <%
@@ -10,7 +10,7 @@
     if (count % 5 != 0)
         pages++;
 
-    List<Branch> lst = service.getAllBranches(1, 5);
+    List<LibraryBranch> lst = service.getAllBranches(1, 5);
 %>
 <%@include file="template.html" %>
 <script>
@@ -43,7 +43,7 @@
     <div class="jumbotron">
         <h1>View Existing Branches</h1>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter branch name to search"> <input
+               placeholder="Enter libraryBranch name to search"> <input
             type="button" value="Search" onclick="search();">
         <h2>Choose Branch you manage:</h2>
         <table class="table">
@@ -52,7 +52,7 @@
                 <th>Address</th>
             </tr>
             <%
-                for (Branch b : lst) {
+                for (LibraryBranch b : lst) {
             %>
             <tr>
                 <td><%=b.getBranchName()%>

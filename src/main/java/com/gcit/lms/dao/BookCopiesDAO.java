@@ -1,8 +1,8 @@
 package com.gcit.lms.dao;
 
 import com.gcit.lms.domain.Book;
-import com.gcit.lms.domain.Branch;
-import com.gcit.lms.domain.Copies;
+import com.gcit.lms.domain.BookCopies;
+import com.gcit.lms.domain.LibraryBranch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -11,33 +11,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CopiesDAO extends BaseDAO implements ResultSetExtractor<List<Copies>> {
+public class BookCopiesDAO extends BaseDAO implements ResultSetExtractor<List<BookCopies>> {
   @Autowired
   BookDAO bookdao;
   @Autowired
-  BranchDAO branchdao;
+  LibraryBranchDAO branchdao;
 
-  public void createCopies(Copies copies) {
+  public void createCopies(BookCopies bookCopies) {
     template.update("insert into tbl_book_copies values (?, ?, ?)",
-        copies.getBook().getBookId(), copies.getBranch().getBranchId(), copies.getNoOfCopies());
+        bookCopies.getBook().getBookId(), bookCopies.getLibraryBranch().getBranchId(), bookCopies.getNoOfCopies());
   }
 
-  public void updateCopies(Copies copies) {
+  public void updateCopies(BookCopies bookCopies) {
     template.update("update tbl_book_copies set noOfCopies = ? where branchId = ? and bookId = ?",
-        copies.getNoOfCopies(), copies.getBranch().getBranchId(), copies.getBook().getBookId());
+        bookCopies.getNoOfCopies(), bookCopies.getLibraryBranch().getBranchId(), bookCopies.getBook().getBookId());
   }
 
-  public void deleteCopies(Copies copies) {
+  public void deleteCopies(BookCopies bookCopies) {
     template.update("delete from tbl_book_copies where branchId = ? and bookId = ?",
-        copies.getBranch().getBranchId(), copies.getBook().getBookId());
+        bookCopies.getLibraryBranch().getBranchId(), bookCopies.getBook().getBookId());
   }
 
-  public List<Copies> getAllCopies() {
+  public List<BookCopies> getAllCopies() {
     return template.query("select * from tbl_book_copies", this);
   }
 
-  public Copies getCopiesByIds(int branchId, int bookId) {
-    List<Copies> copies = template.query("select * from tbl_book_copies where branchId = ? and bookId = ?",
+  public BookCopies getCopiesByIds(int branchId, int bookId) {
+    List<BookCopies> copies = template.query("select * from tbl_book_copies where branchId = ? and bookId = ?",
         new Object[]{branchId, bookId}, this);
 
     if (copies != null && copies.size() > 0) {
@@ -46,14 +46,14 @@ public class CopiesDAO extends BaseDAO implements ResultSetExtractor<List<Copies
     return null;
   }
 
-  public List<Copies> getAllCopiesByBranchId(int branchId, int pageNo, int pageSize) {
+  public List<BookCopies> getAllCopiesByBranchId(int branchId, int pageNo, int pageSize) {
     setPageNo(pageNo);
     setPageSize(pageSize);
     return template.query(addLimit("select * from tbl_book_copies where branchId = ?"),
         new Object[]{branchId}, this);
   }
 
-  public List<Copies> getAllCopiesByTitleAndByBranchId(int branchId, int pageNo, int pageSize, String searchString) {
+  public List<BookCopies> getAllCopiesByTitleAndByBranchId(int branchId, int pageNo, int pageSize, String searchString) {
     setPageNo(pageNo);
     setPageSize(pageSize);
     return template.query(addLimit("select * from tbl_book_copies t1 join tbl_book t2 on t1.bookId = t2.bookId where branchId = ? and title like ?"),
@@ -61,19 +61,19 @@ public class CopiesDAO extends BaseDAO implements ResultSetExtractor<List<Copies
   }
 
   @Override
-  public List<Copies> extractData(ResultSet rs) {
-    List<Copies> copies = new ArrayList<Copies>();
+  public List<BookCopies> extractData(ResultSet rs) {
+    List<BookCopies> copies = new ArrayList<BookCopies>();
 
     try {
       while (rs.next()) {
-        Copies c = new Copies();
+        BookCopies c = new BookCopies();
         c.setNoOfCopies(rs.getInt("noOfCopies"));
 
         Book book = bookdao.getBookById(rs.getInt("bookId"));
         c.setBook(book);
 
-        Branch branch = branchdao.getBranchById(rs.getInt("branchId"));
-        c.setBranch(branch);
+        LibraryBranch libraryBranch = branchdao.getBranchById(rs.getInt("branchId"));
+        c.setLibraryBranch(libraryBranch);
 
         copies.add(c);
       }

@@ -19,9 +19,9 @@ import java.util.Locale;
  * Handles requests for the application home page.
  */
 @Controller
-public class LibController {
+public class LibrarianController {
   @SuppressWarnings("unused")
-  private static final Logger logger = LoggerFactory.getLogger(LibController.class);
+  private static final Logger logger = LoggerFactory.getLogger(LibrarianController.class);
   @Autowired
   LibrarianService service;
 
@@ -29,7 +29,7 @@ public class LibController {
   @ResponseBody
   public String searchLibBranches(Locale locale, Model model, @RequestParam(value = "searchString") String searchString) {
     searchString = "%" + searchString + "%";
-    List<Branch> lst = service.getBranchesByName(searchString, -1, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, -1, 5);
     int count = lst.size();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
@@ -46,10 +46,10 @@ public class LibController {
                                 @RequestParam(value = "pageNo") int pageNo) {
     searchString = "%" + searchString + "%";
 
-    List<Branch> lst = service.getBranchesByName(searchString, pageNo, 5);
+    List<LibraryBranch> lst = service.getBranchesByName(searchString, pageNo, 5);
     StringBuilder sb = new StringBuilder();
     sb.append("<tr><th>Name</th><th>Address</th></tr>");
-    for (Branch b : lst) {
+    for (LibraryBranch b : lst) {
       sb.append("<tr><td>" + b.getBranchName() + "</td>"
           + "<td>" + b.getBranchAddress() + "</td><td><button type='button' class='btn btn btn-info' "
           + "onclick=\"javascript:location.href='choosebranch?id=" + b.getBranchId()
@@ -110,11 +110,11 @@ public class LibController {
   @RequestMapping(value = "/getCopies", method = RequestMethod.GET)
   public String getCopies(Locale locale, Model model, @RequestParam(value = "branchId") Integer branchId,
                           @RequestParam(value = "bookId") Integer bookId) {
-    Copies c = service.getCopiesByIds(branchId, bookId);
+    BookCopies c = service.getCopiesByIds(branchId, bookId);
     if (c == null) {
-      c = new Copies();
+      c = new BookCopies();
       c.setBook(service.getBookById(bookId));
-      c.setBranch(service.getBranchById(branchId));
+      c.setLibraryBranch(service.getBranchById(branchId));
     }
     model.addAttribute("copies", c);
     return "choosebook";
@@ -129,16 +129,16 @@ public class LibController {
     boolean success = true;
     try {
       newValue = Integer.parseInt(newCopies);
-      Copies c = new Copies();
+      BookCopies c = new BookCopies();
       c.setNoOfCopies(newValue);
 
       Book book = new Book();
       book.setBookId(bookId);
       c.setBook(book);
 
-      Branch branch = new Branch();
-      branch.setBranchId(branchId);
-      c.setBranch(branch);
+      LibraryBranch libraryBranch = new LibraryBranch();
+      libraryBranch.setBranchId(branchId);
+      c.setLibraryBranch(libraryBranch);
 
       if (oldCopies == 0 && newValue != 0) success = service.createCopies(c);
       else if (oldCopies != 0 && newValue != 0) success = service.updateCopies(c);
@@ -146,7 +146,7 @@ public class LibController {
     } catch (NumberFormatException e) {
       success = false;
     } finally {
-      model.addAttribute("message", success ? "Copies Updated Sucessfully" : "Failed to Update Copies");
+      model.addAttribute("message", success ? "BookCopies Updated Sucessfully" : "Failed to Update BookCopies");
       model.addAttribute("service", service);
     }
     return "listbooks";

@@ -2,7 +2,7 @@ package com.gcit.lms.domain;
 
 import java.io.Serializable;
 
-public class Branch implements Serializable {
+public class LibraryBranch implements Serializable {
   /**
    *
    */
@@ -77,7 +77,7 @@ public class Branch implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Branch other = (Branch) obj;
+    LibraryBranch other = (LibraryBranch) obj;
     if (branchAddress == null) {
       if (other.branchAddress != null)
         return false;
