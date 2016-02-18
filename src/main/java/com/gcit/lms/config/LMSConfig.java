@@ -1,4 +1,4 @@
-package com.gcit.lms;
+package com.gcit.lms.config;
 
 import com.gcit.lms.dao.*;
 import com.gcit.lms.service.AdminService;

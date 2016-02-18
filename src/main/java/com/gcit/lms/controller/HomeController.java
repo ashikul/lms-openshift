@@ -1,4 +1,4 @@
-package com.gcit.lms;
+package com.gcit.lms.controller;
 
 import com.gcit.lms.service.AdminService;
 import com.gcit.lms.service.BorrowerService;
