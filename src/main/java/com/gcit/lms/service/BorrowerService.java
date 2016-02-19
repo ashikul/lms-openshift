@@ -32,9 +32,9 @@ public class BorrowerService {
   }
 
   public List<LibraryBranch> getAllBranchesByCardNo(int cardNo) {
-    List<BookLoan> bookLoen = ldao.getLoansByCardNo(cardNo);
+    List<BookLoan> bookLoan = ldao.getLoansByCardNo(cardNo);
     List<LibraryBranch> libraryBranches = new ArrayList<LibraryBranch>();
-    for (BookLoan l : bookLoen) {
+    for (BookLoan l : bookLoan) {
       LibraryBranch b = l.getLibraryBranch();
       if (!libraryBranches.contains(b)) libraryBranches.add(l.getLibraryBranch());
     }
@@ -42,9 +42,9 @@ public class BorrowerService {
   }
 
   public List<Book> getAllBooksLoanedByCardNoAndBranchId(int cardNo, int branchId, int pageNo, int pageSize) {
-    List<BookLoan> bookLoen = ldao.getLoansByCardNoAndBranchId(cardNo, branchId, pageNo, pageSize);
+    List<BookLoan> bookLoan = ldao.getLoansByCardNoAndBranchId(cardNo, branchId, pageNo, pageSize);
     List<Book> books = new ArrayList<Book>();
-    for (BookLoan l : bookLoen) {
+    for (BookLoan l : bookLoan) {
       books.add(l.getBook());
     }
     return books;
@@ -146,9 +146,9 @@ public class BorrowerService {
 
   public List<Book> getAllBooksLoanedByTitleAndCardNoAndBranchId(String searchString, int cardNo, int branchId,
                                                                  int pageNo, int pageSize) {
-    List<BookLoan> bookLoen = ldao.getLoansByTitleAndCardNoAndBranchId(searchString, cardNo, branchId, pageNo, pageSize);
+    List<BookLoan> bookLoan = ldao.getLoansByTitleAndCardNoAndBranchId(searchString, cardNo, branchId, pageNo, pageSize);
     List<Book> books = new ArrayList<Book>();
-    for (BookLoan l : bookLoen) {
+    for (BookLoan l : bookLoan) {
       books.add(l.getBook());
     }
     return books;
