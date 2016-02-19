@@ -12,7 +12,7 @@
 
     List<LibraryBranch> lst = service.getAllBranchesByCardNo(cardNo);
 %>
-<%@include file="template.html" %>
+<%@include file="header.html" %>
 <script>
     function search() {
         $.ajax({

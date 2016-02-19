@@ -11,7 +11,7 @@
     List<Publisher> publishers = service.getAllPublishers(-1, 5);
     List<Genre> genres = service.getAllGenres();
 %>
-<%@include file="template.html" %>
+<%@include file="header.html" %>
 <div class="container theme-showcase" role="main">
 
     <!-- Main jumbotron for a primary marketing message or call to action -->

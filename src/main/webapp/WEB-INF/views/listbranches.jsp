@@ -12,7 +12,7 @@
 
     List<LibraryBranch> lst = service.getAllBranches(1, 5);
 %>
-<%@include file="template.html" %>
+<%@include file="header.html" %>
 <script>
     function search() {
         $.ajax({

@@ -11,7 +11,7 @@
 
     List<LibraryBranch> lst = service.getAllBranches(1, 5);
 %>
-<%@include file="template.html" %>
+<%@include file="header.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');

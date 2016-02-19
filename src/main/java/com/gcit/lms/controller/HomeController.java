@@ -60,7 +60,7 @@ public class HomeController {
 
   @RequestMapping(value = "/addauthor", method = RequestMethod.GET)
   public String addAuthor(Locale locale, Model model) {
-    return "addauthor";
+    return "admin/addauthor";
   }
 
   @RequestMapping(value = "/viewauthors", method = RequestMethod.GET)

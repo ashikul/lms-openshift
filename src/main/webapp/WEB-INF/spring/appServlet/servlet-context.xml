@@ -24,6 +24,7 @@
 
     <context:component-scan base-package="com.gcit.lms"/>
 
-    <resources mapping="/bootstrap/**" location="/bootstrap/"/>
-
+    <!--<resources mapping="/bootstrap/**" location="/bootstrap/"/>-->
+    <resources mapping="/assets/scripts/**" location="/assets/scripts/"/>
+    <resources mapping="/assets/styles/**" location="/assets/styles/"/>
 </beans:beans>
