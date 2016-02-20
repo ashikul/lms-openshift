@@ -3,7 +3,7 @@
 
 
     <div class="jumbotron">
-        <h1>Welcome Borrower</h1>
+        <h1>Hello Borrower</h1>
         <h2>Your Card Number is: <%=request.getParameter("cardNo")%>
         </h2>
         <ul class="nav nav-pills nav-stacked">

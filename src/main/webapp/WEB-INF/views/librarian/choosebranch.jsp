@@ -13,7 +13,7 @@
             <%=request.getParameter("name")%>,
             <%=request.getParameter("address")%>
         </h1>
-        <h2>Pick your option:</h2>
+        <h2>Choose an option:</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a data-toggle="modal" data-target="#myModal1"
                    href="editBranch?id=<%=request.getParameter("id")%>&forward=choosebranch">Update

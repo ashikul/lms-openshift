@@ -104,7 +104,7 @@ public class AdminController {
     sb.append("<tr><th>Name</th></tr>");
     for (Author a : lst) {
       sb.append("<tr><td>" + a.getAuthorName() + "</td><td><button type='button' "
-          + "class='btn btn btn-primary'data-toggle='modal' data-target='#myModal1'"
+          + "class='btn btn btn-default'data-toggle='modal' data-target='#myModal1'"
           + "href='editAuthor?authorId=" + a.getAuthorId() + "'>EDIT</button></td><td>"
           + "<button type='button' class='btn btn btn-danger' "
           + "onclick=\"javascript:location.href='deleteAuthor?authorId=" + a.getAuthorId() + "'\">DELETE</button></td></tr>)");
@@ -232,7 +232,7 @@ public class AdminController {
         sb.append("<td>" + g.getGenreName() + "</td>");
       for (int i = b.getGenres().size(); i < maxGenre; i++)
         sb.append("<td></td>");
-      sb.append("<td><button type='button' class='btn btn btn-primary' data-toggle='modal' data-target='#myModal1' "
+      sb.append("<td><button type='button' class='btn btn btn-default' data-toggle='modal' data-target='#myModal1' "
           + "href='editBook?bookId=" + b.getBookId() + "'>EDIT</button></td>"
           + "<td><button type='button' class='btn btn btn-danger' "
           + "onclick=\"javascript:location.href='deleteBook?bookId=" + b.getBookId() + "'\">DELETE</button></td></tr>");
@@ -312,7 +312,7 @@ public class AdminController {
       sb.append("<tr><td>" + p.getPublisherName() + "</td>"
           + "<td>" + p.getPublisherAddress() + "</td>"
           + "<td>" + (p.getPublisherPhone() != null ? p.getPublisherPhone() : "") + "</td>"
-          + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' data-target='#myModal1' "
+          + "<td><button type='button' class='btn btn btn-default' data-toggle='modal' data-target='#myModal1' "
           + "href='editPublisher?id=" + p.getPublisherId() + "'>EDIT</button></td>"
           + "<td><button type='button' class='btn btn btn-danger' "
           + "onclick=\"javascript:location.href='deletePublisher?id=" + p.getPublisherId() + "'\">DELETE</button></td></tr>");
@@ -392,7 +392,7 @@ public class AdminController {
     for (LibraryBranch b : lst) {
       sb.append("<tr><td>" + b.getBranchName() + "</td>"
           + "<td>" + b.getBranchAddress() + "</td>"
-          + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' data-target='#myModal1' "
+          + "<td><button type='button' class='btn btn btn-default' data-toggle='modal' data-target='#myModal1' "
           + "href='editBranch?id=" + b.getBranchId() + "'>EDIT</button></td>"
           + "<td><button type='button' class='btn btn btn-danger' "
           + "onclick=\"javascript:location.href='deleteBranch?id=" + b.getBranchId() + "'\">DELETE</button></td></tr>");
@@ -472,7 +472,7 @@ public class AdminController {
       sb.append("<tr><td>" + b.getName() + "</td>"
           + "<td>" + b.getAddress() + "</td>"
           + "<td>" + (b.getPhone() != null ? b.getPhone() : "") + "</td>"
-          + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' data-target='#myModal1' "
+          + "<td><button type='button' class='btn btn btn-default' data-toggle='modal' data-target='#myModal1' "
           + "href='editBorrower?id=" + b.getCardNo() + "'>EDIT</button></td>"
           + "<td><button type='button' class='btn btn btn-danger' "
           + "onclick=\"javascript:location.href='deleteBorrower?id=" + b.getCardNo() + "'\">DELETE</button></td></tr>");
@@ -554,7 +554,7 @@ public class AdminController {
       sb.append("<tr><td>" + l.getBorrower().getName() + "</td><td>" + l.getBook().getTitle() + "</td>"
           + "<td>" + l.getLibraryBranch().getBranchName() + "</td><td>" + l.getLibraryBranch().getBranchAddress() + "</td>"
           + "<td>" + l.getDateOut().toString() + "</td><td>" + l.getDueDate().toString() + "</td>"
-          + "<td><button type='button' class='btn btn btn-primary' data-toggle='modal' "
+          + "<td><button type='button' class='btn btn btn-default' data-toggle='modal' "
           + "data-target='#myModal1' href='overrideloan?bookId=" + l.getBook().getBookId()
           + "&branchId=" + l.getLibraryBranch().getBranchId() + "&cardNo=" + l.getBorrower().getCardNo()
           + "&dateOut=" + l.getDateOut().toString() + "&dueDate=" + l.getDueDate().toString() + "'>OVERRIDE</button></td></tr>");
