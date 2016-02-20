@@ -29,7 +29,7 @@ public class BorrowerController {
   public String validateCard(Locale locale, Model model, @RequestParam(value = "cardNo") Integer cardNo) {
     boolean success = service.validateCard(cardNo) != null;
     model.addAttribute("message", success ? "Signed-in Successfully" : "Failed to Sign-in");
-    return success ? "signin" : "checkcard";
+    return success ? "borrower/signin" : "borrower/checkcard";
   }
 
   @RequestMapping(value = "/checkout", method = RequestMethod.GET)

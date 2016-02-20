@@ -114,6 +114,7 @@ public class LibrarianController {
       c.setBook(service.getBookById(bookId));
       c.setLibraryBranch(service.getBranchById(branchId));
     }
+    model.addAttribute("service", service);
     model.addAttribute("copies", c);
     return "librarian/choosebook";
   }
