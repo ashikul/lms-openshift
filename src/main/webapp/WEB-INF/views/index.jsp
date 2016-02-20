@@ -7,7 +7,6 @@
             <div class="col-sm-12">
                 <h1>GCIT Library Management System</h1>
             </div>
-
         </div>
     </div>
 </div>
