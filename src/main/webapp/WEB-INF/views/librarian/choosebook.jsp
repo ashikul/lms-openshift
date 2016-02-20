@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>GCIT LMS</title>
-</head>
-<body>
+<%@include file="../modalcss.html" %>
+<div class="jumbotron-modal">
 <h1>You have chosen
     Branch: ${bookCopies.getLibraryBranch().getBranchName()}, ${bookCopies.getLibraryBranch().getBranchAddress()}</h1>
 <h1>Book Title: ${bookCopies.getBook().getTitle()}</h1>
@@ -18,5 +13,4 @@
     <input type="hidden" name="bookId" value="${bookCopies.getBook().getBookId()}">
     <input type="submit" value="Submit">
 </form>
-</body>
-</html>
+</div>
