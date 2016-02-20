@@ -6,7 +6,7 @@
         <h1>Welcome Administrator</h1>
         <h2>Pick your option:</h2>
         <ul class="nav nav-pills nav-stacked">
-            <li><a href="authors">Add/Update/Delete/View Authors</a></li>
+            <li><a href="viewauthors">Add/Update/Delete/View Authors</a></li>
             <li><a href="books">Add/Update/Delete/View Books</a></li>
             <li><a href="publishers">Add/Update/Delete/View
                 Publishers</a></li>

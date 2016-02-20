@@ -1,4 +1,4 @@
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">

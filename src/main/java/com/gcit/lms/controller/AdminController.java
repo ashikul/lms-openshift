@@ -24,14 +24,31 @@ public class AdminController {
   @Autowired
   AdminService service;
 
-  @RequestMapping(value = "/addAuthor", method = RequestMethod.POST)
-  public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName") String name) {
+//  @RequestMapping(value = "/addAuthor", method = RequestMethod.POST)
+//  public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName") String name) {
+//    Author author = new Author();
+//    author.setAuthorName(name);
+//
+//    boolean success = service.createAuthor(author);
+//    model.addAttribute("message", success ? "Author Added Sucessfully" : "Failed to Add Author");
+//    return "authors";
+//  }
+
+  @RequestMapping(value = "/addAuthor", method = {RequestMethod.GET, RequestMethod.POST})
+  public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName", required = false) String name) {
+    if (name == null) {
+//      model.addAttribute("author", service.getAuthorById(id));
+      return "addauthor";
+    }
+    else {
+      model.addAttribute("service", service);
     Author author = new Author();
     author.setAuthorName(name);
 
     boolean success = service.createAuthor(author);
     model.addAttribute("message", success ? "Author Added Sucessfully" : "Failed to Add Author");
-    return "authors";
+      return "viewauthors";
+    }
   }
 
   @RequestMapping(value = "/editAuthor", method = {RequestMethod.GET, RequestMethod.POST})

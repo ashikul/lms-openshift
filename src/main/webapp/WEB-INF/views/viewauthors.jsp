@@ -44,9 +44,27 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>View Existing Authors</h1>
-        <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter author name to search"> <input
-            type="button" value="Search" onclick="search();">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="col-md-4" id="searchString"
+                           placeholder="Enter author name to search"> <input
+                        type="button" value="Search" onclick="search();">
+
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn btn-success"
+                            data-toggle="modal" data-target="#myModal1"
+                            href="addAuthor">ADD
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -95,3 +113,9 @@
         <div class="modal-content"></div>
     </div>
 </div>
+<%--<div id="myModal2" class="modal fade" tabindex="-1" role="dialog"--%>
+<%--aria-labelledby="myLargeModalLabel">--%>
+<%--<div class="modal-dialog modal-lg">--%>
+<%--<div class="modal-content"></div>--%>
+<%--</div>--%>
+<%--</div>--%>
