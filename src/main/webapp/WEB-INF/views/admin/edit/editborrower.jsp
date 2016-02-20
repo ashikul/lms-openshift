@@ -1,12 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>GCIT LMS</title>
-</head>
-<body>
+<%@include file="../../modalcss.html" %>
+<div class="jumbotron-modal">
 <h1>Edit Borrower</h1>
 <h2>Enter New Details</h2>
 <form action="editBorrower" method="post">
@@ -27,6 +20,4 @@
     <input type="hidden" name="id" value="${borrower.getCardNo()}">
     <input type="submit" value="Submit">
 </form>
-<p>
-</body>
-</html>
+</div>

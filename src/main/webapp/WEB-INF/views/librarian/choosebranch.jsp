@@ -16,12 +16,11 @@
         <h2>Choose an option:</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a data-toggle="modal" data-target="#myModal1"
-                   href="editBranch?id=<%=request.getParameter("id")%>&forward=choosebranch">Update
-                the details of the Library</a></li>
+                   href="editBranch?id=<%=request.getParameter("id")%>&forward=choosebranch">Update library branch
+                info</a></li>
             <li><a
-                    href="listbooks?branchId=<%=request.getParameter("id")%>">Add
-                bookCopies of Book to the Branch</a></li>
-            <li><a href="listbranches">Quit to previous</a></li>
+                    href="listbooks?branchId=<%=request.getParameter("id")%>">Update book copies</a></li>
+            <%--<li><a href="listbranches">Quit to previous</a></li>--%>
         </ul>
         <p>${message}</p>
     </div>

@@ -1,7 +1,5 @@
-<%@include file="../../navbar.html" %>
-<div class="container theme-showcase" role="main">
-
-    <div class="jumbotron">
+<%@include file="../../modalcss.html" %>
+<div class="jumbotron-modal">
         <h1>Add Branch</h1>
         <h2>Enter Branch Details</h2>
         <form action="addBranch" method="post">
@@ -18,4 +16,3 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-</div>

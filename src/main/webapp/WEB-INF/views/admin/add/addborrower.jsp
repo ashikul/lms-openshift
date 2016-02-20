@@ -1,7 +1,5 @@
-<%@include file="../../navbar.html" %>
-<div class="container theme-showcase" role="main">
-
-    <div class="jumbotron">
+<%@include file="../../modalcss.html" %>
+<div class="jumbotron-modal">
         <h1>Add Borrower</h1>
         <h2>Enter Borrower Details</h2>
         <form action="addBorrower" method="post">
@@ -22,4 +20,3 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-</div>

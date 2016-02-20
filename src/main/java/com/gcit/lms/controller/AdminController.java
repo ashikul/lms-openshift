@@ -111,10 +111,47 @@ public class AdminController {
     return sb.toString();
   }
 
-  @RequestMapping(value = "/addBook", method = RequestMethod.POST)
-  public String addBook(Locale locale, Model model, @RequestParam(value = "title") String title,
-                        @RequestParam(value = "authorId", required = false) String[] authorIds, @RequestParam(value = "pubId") int pubId,
+//  @RequestMapping(value = "/addBook", method = RequestMethod.POST)
+//  public String addBook(Locale locale, Model model, @RequestParam(value = "title") String title,
+//                        @RequestParam(value = "authorId", required = false) String[] authorIds, @RequestParam(value = "pubId") int pubId,
+//                        @RequestParam(value = "genre_id", required = false) String[] genre_ids) {
+//    Book book = new Book();
+//    book.setTitle(title);
+//    List<Author> authors = new ArrayList<Author>();
+//    for (int i = 0; authorIds != null && i < authorIds.length; i++) {
+//      Author a = new Author();
+//      a.setAuthorId(Integer.parseInt(authorIds[i]));
+//      authors.add(a);
+//    }
+//    book.setAuthors(authors);
+//    Publisher borrower = new Publisher();
+//    borrower.setPublisherId(pubId);
+//    book.setPublisher(borrower);
+//    List<Genre> genres = new ArrayList<Genre>();
+//    for (int i = 0; genre_ids != null && i < genre_ids.length; i++) {
+//      Genre g = new Genre();
+//      g.setGenreId(Integer.parseInt(genre_ids[i]));
+//      genres.add(g);
+//    }
+//    book.setGenres(genres);
+//
+//    boolean success = service.createBook(book);
+//    model.addAttribute("message", success ? "Book Added successfully" : "Failed to Add Book");
+//    return "removed/books";
+//  }
+
+
+  @RequestMapping(value = "/addBook", method = {RequestMethod.GET, RequestMethod.POST})
+  public String addBook(Locale locale, Model model, @RequestParam(value = "title", required = false) String title,
+                        @RequestParam(value = "authorId", required = false) String[] authorIds, @RequestParam(value = "pubId", required = false) Integer pubId,
                         @RequestParam(value = "genre_id", required = false) String[] genre_ids) {
+    if (title == null) {
+      model.addAttribute("service", service);
+      return "admin/add/addbook";
+    }
+    else {
+
+      model.addAttribute("service", service);
     Book book = new Book();
     book.setTitle(title);
     List<Author> authors = new ArrayList<Author>();
@@ -134,14 +171,14 @@ public class AdminController {
       genres.add(g);
     }
     book.setGenres(genres);
-
     boolean success = service.createBook(book);
     model.addAttribute("message", success ? "Book Added successfully" : "Failed to Add Book");
-    return "removed/books";
+      return "admin/view/viewbooks";
+    }
   }
 
   @RequestMapping(value = "/editBook", method = {RequestMethod.GET, RequestMethod.POST})
-  public String editBook(Locale locale, Model model, @RequestParam(value = "title", required = false) String title, @RequestParam(value = "bookId") int id,
+  public String editBook(Locale locale, Model model, @RequestParam(value = "title", required = false) String title, @RequestParam(value = "bookId") Integer id,
                          @RequestParam(value = "authorId", required = false) String[] authorIds, @RequestParam(value = "pubId", required = false) Integer pubId,
                          @RequestParam(value = "genre_id", required = false) String[] genre_ids) {
     model.addAttribute("service", service);
@@ -179,7 +216,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
-  public String deleteBook(Locale locale, Model model, @RequestParam(value = "bookId") int id) {
+  public String deleteBook(Locale locale, Model model, @RequestParam(value = "bookId") Integer id) {
     model.addAttribute("service", service);
     Book Book = new Book();
     Book.setBookId(id);
@@ -239,9 +276,27 @@ public class AdminController {
     return sb.toString();
   }
 
-  @RequestMapping(value = "/addPublisher", method = RequestMethod.POST)
-  public String addPublisher(Locale locale, Model model, @RequestParam(value = "name") String name,
-                             @RequestParam(value = "address") String address, @RequestParam(value = "phone") String phone) {
+//  @RequestMapping(value = "/addPublisher", method = RequestMethod.POST)
+//  public String addPublisher(Locale locale, Model model, @RequestParam(value = "name") String name,
+//                             @RequestParam(value = "address") String address, @RequestParam(value = "phone") String phone) {
+//    Publisher publisher = new Publisher();
+//    publisher.setPublisherName(name);
+//    publisher.setPublisherAddress(address);
+//    publisher.setPublisherPhone(phone);
+//
+//    boolean success = service.createPublisher(publisher);
+//    model.addAttribute("message", success ? "Publisher Added successfully" : "Failed to Add Publisher");
+//    return "removed/publishers";
+//  }
+
+  @RequestMapping(value = "/addPublisher", method = {RequestMethod.GET, RequestMethod.POST})
+  public String addPublisher(Locale locale, Model model, @RequestParam(value = "name", required = false) String name,
+                             @RequestParam(value = "address", required = false) String address, @RequestParam(value = "phone", required = false) String phone) {
+    if ((name == null)) {
+      return "admin/add/addpublisher";
+    }
+    else {
+      model.addAttribute("service", service);
     Publisher publisher = new Publisher();
     publisher.setPublisherName(name);
     publisher.setPublisherAddress(address);
@@ -249,7 +304,8 @@ public class AdminController {
 
     boolean success = service.createPublisher(publisher);
     model.addAttribute("message", success ? "Publisher Added successfully" : "Failed to Add Publisher");
-    return "removed/publishers";
+      return "admin/view/viewpublishers";
+    }
   }
 
   @RequestMapping(value = "/editPublisher", method = {RequestMethod.GET, RequestMethod.POST})
@@ -319,16 +375,34 @@ public class AdminController {
     return sb.toString();
   }
 
-  @RequestMapping(value = "/addBranch", method = RequestMethod.POST)
-  public String addBranch(Locale locale, Model model, @RequestParam(value = "name") String name,
-                          @RequestParam(value = "address") String address) {
+//  @RequestMapping(value = "/addBranch", {RequestMethod.GET, RequestMethod.POST})
+//  public String addBranch(Locale locale, Model model, @RequestParam(value = "name") String name,
+//                          @RequestParam(value = "address") String address) {
+//    LibraryBranch libraryBranch = new LibraryBranch();
+//    libraryBranch.setBranchName(name);
+//    libraryBranch.setBranchAddress(address);
+//
+//    boolean success = service.createBranch(libraryBranch);
+//    model.addAttribute("message", success ? "LibraryBranch Added successfully" : "Failed to Add LibraryBranch");
+//    return "removed/branches";
+//  }
+
+  @RequestMapping(value = "/addBranch", method = {RequestMethod.GET, RequestMethod.POST})
+  public String addBranch(Locale locale, Model model, @RequestParam(value = "name", required = false) String name,
+                          @RequestParam(value = "address", required = false) String address) {
+    if ((name == null)) {
+      return "admin/add/addbranch";
+    }
+    else {
+      model.addAttribute("service", service);
     LibraryBranch libraryBranch = new LibraryBranch();
     libraryBranch.setBranchName(name);
     libraryBranch.setBranchAddress(address);
 
     boolean success = service.createBranch(libraryBranch);
     model.addAttribute("message", success ? "LibraryBranch Added successfully" : "Failed to Add LibraryBranch");
-    return "removed/branches";
+      return "admin/view/viewbranches";
+    }
   }
 
   @RequestMapping(value = "/editBranch", method = {RequestMethod.GET, RequestMethod.POST})
@@ -399,17 +473,23 @@ public class AdminController {
     return sb.toString();
   }
 
-  @RequestMapping(value = "/addBorrower", method = RequestMethod.POST)
-  public String addBorrower(Locale locale, Model model, @RequestParam(value = "name") String name,
-                            @RequestParam(value = "address") String address, @RequestParam(value = "phone") String phone) {
-    Borrower borrower = new Borrower();
-    borrower.setName(name);
-    borrower.setAddress(address);
-    borrower.setPhone(phone);
+  @RequestMapping(value = "/addBorrower", method = {RequestMethod.GET, RequestMethod.POST})
+  public String addBorrower(Locale locale, Model model, @RequestParam(value = "name", required = false) String name,
+                            @RequestParam(value = "address", required = false) String address, @RequestParam(value = "phone", required = false) String phone) {
+    if (name == null) {
+      return "admin/add/addborrower";
+    }
+    else {
+      model.addAttribute("service", service);
+      Borrower borrower = new Borrower();
+      borrower.setName(name);
+      borrower.setAddress(address);
+      borrower.setPhone(phone);
 
-    boolean success = service.createBorrower(borrower);
-    model.addAttribute("message", success ? "Borrower Added successfully" : "Failed to Add Borrower");
-    return "removed/borrowers";
+      boolean success = service.createBorrower(borrower);
+      model.addAttribute("message", success ? "Borrower Added successfully" : "Failed to Add Borrower");
+      return "admin/view/viewborrowers";
+    }
   }
 
   @RequestMapping(value = "/editBorrower", method = {RequestMethod.GET, RequestMethod.POST})

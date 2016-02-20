@@ -1,3 +1,4 @@
+<%@include file="../../modalcss.html" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="com.gcit.lms.domain.Author" %>
@@ -11,11 +12,7 @@
     List<Publisher> publishers = service.getAllPublishers(-1, 5);
     List<Genre> genres = service.getAllGenres();
 %>
-<%@include file="../../navbar.html" %>
-<div class="container theme-showcase" role="main">
-
-
-    <div class="jumbotron">
+<div class="jumbotron-modal">
         <h1>Add Book</h1>
         <h2>Enter Book Details</h2>
         <form action="addBook" method="post">
@@ -67,4 +64,3 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-</div>

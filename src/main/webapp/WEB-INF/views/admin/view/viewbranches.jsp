@@ -44,9 +44,25 @@
 
     <div class="jumbotron">
         <h1>Table Branches</h1>
-        <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter libraryBranch name to search"> <input
-            type="button" value="Search" onclick="search();">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="col-md-4" id="searchString"
+                           placeholder="Enter library branch to search"> <input
+                        type="button" value="Search" onclick="search();">
+
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn btn-info"
+                            data-toggle="modal" data-target="#myModal1"
+                            href="addBranch">ADD
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
         <table class="table">
             <tr>
                 <th>Name</th>

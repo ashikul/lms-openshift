@@ -1,3 +1,4 @@
+<%@include file="../../modalcss.html" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="com.gcit.lms.domain.Author" %>
@@ -12,13 +13,7 @@
     List<Publisher> publishers = service.getAllPublishers(-1, 5);
     List<Genre> genres = service.getAllGenres();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>GCIT LMS</title>
-</head>
-<body>
+<div class="jumbotron-modal">
 <h1>Edit Book</h1>
 <h2>Enter Book Details</h2>
 <form action="editBook" method="post">
@@ -67,6 +62,4 @@
     <input type="hidden" name="bookId" value="${book.getBookId()}">
     <input type="submit" value="Submit">
 </form>
-<p>
-</body>
-</html>
+</div>

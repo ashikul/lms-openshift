@@ -52,6 +52,7 @@ public class PublisherDAO extends BaseDAO implements ResultSetExtractor<List<Pub
     return template.queryForObject("select count(*) as count from tbl_publisher", Integer.class);
   }
 
+
   public Publisher getPublisherByBookId(int bookId) {
     List<Publisher> publishers = template.query("select * from tbl_publisher where publisherId in (select pubId as publisherId from tbl_book where bookId = ?)",
         new Object[]{bookId}, this);
