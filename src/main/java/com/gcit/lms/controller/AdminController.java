@@ -410,7 +410,7 @@ public class AdminController {
                            @RequestParam(value = "id") Integer id, @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "phone", required = false) String phone, @RequestParam(value = "forward", required = false) String forward) {
     if (name == null) {
-      model.addAttribute("branch", service.getBranchById(id));
+      model.addAttribute("libraryBranch", service.getBranchById(id));
       return "admin/edit/editbranch";
     }
     else {
@@ -421,7 +421,7 @@ public class AdminController {
       libraryBranch.setBranchAddress(address);
 
       boolean success = service.updateBranch(libraryBranch);
-      model.addAttribute("message", success ? "LibraryBranch Edited successfully" : "Failed to Edit LibraryBranch");
+      model.addAttribute("message", success ? "Library Branch Edited successfully" : "Failed to Edit LibraryBranch");
       if (forward.equals(""))
         return "admin/view/viewbranches";
       else
