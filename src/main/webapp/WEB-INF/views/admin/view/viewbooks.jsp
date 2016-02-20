@@ -90,7 +90,8 @@
                 <%
                     for (Author a : b.getAuthors()) {
                 %>
-                <td><%=a.getAuthorName()%>
+                <td>
+                    <%=a.getAuthorName()%>
                 </td>
                 <%
                     }
