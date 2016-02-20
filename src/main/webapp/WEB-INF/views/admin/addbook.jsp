@@ -11,7 +11,7 @@
     List<Publisher> publishers = service.getAllPublishers(-1, 5);
     List<Genre> genres = service.getAllGenres();
 %>
-<%@include file="../header.html" %>
+<%@include file="../navbar.html" %>
 <div class="container theme-showcase" role="main">
 
 

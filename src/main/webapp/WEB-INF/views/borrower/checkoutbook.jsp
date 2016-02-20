@@ -22,7 +22,7 @@
             maxGenre = b.getGenres().size();
     }
 %>
-<%@include file="../header.html" %>
+<%@include file="../navbar.html" %>
 <script>
     function search() {
         $.ajax({

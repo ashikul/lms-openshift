@@ -1,4 +1,4 @@
-<%@include file="../header.html" %>
+<%@include file="../navbar.html" %>
 <div class="container theme-showcase" role="main">
 
 

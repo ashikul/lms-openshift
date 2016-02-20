@@ -11,7 +11,7 @@
 
     List<LibraryBranch> libraryBranches = service.getAllBranches(1, 5);
 %>
-<%@include file="../header.html" %>
+<%@include file="../navbar.html" %>
 <script>
     function search() {
         $.ajax({
