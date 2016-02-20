@@ -38,7 +38,7 @@ public class AdminController {
   public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName", required = false) String name) {
     if (name == null) {
 //      model.addAttribute("author", service.getAuthorById(id));
-      return "addauthor";
+      return "admin/addauthor";
     }
     else {
       model.addAttribute("service", service);
@@ -47,7 +47,7 @@ public class AdminController {
 
     boolean success = service.createAuthor(author);
     model.addAttribute("message", success ? "Author Added Sucessfully" : "Failed to Add Author");
-      return "viewauthors";
+      return "admin/viewauthors";
     }
   }
 
@@ -55,7 +55,7 @@ public class AdminController {
   public String editAuthor(Locale locale, Model model, @RequestParam(value = "authorName", required = false) String name, @RequestParam(value = "authorId") int id) {
     if (name == null) {
       model.addAttribute("author", service.getAuthorById(id));
-      return "editauthor";
+      return "admin/editauthor";
     }
     else {
       model.addAttribute("service", service);
@@ -65,7 +65,7 @@ public class AdminController {
 
       boolean success = service.updateAuthor(author);
       model.addAttribute("message", success ? "Author Edited Sucessfully" : "Failed to Edit Author");
-      return "viewauthors";
+      return "admin/viewauthors";
     }
   }
 
@@ -76,7 +76,7 @@ public class AdminController {
     author.setAuthorId(id);
 
     service.deleteAuthor(author);
-    return "viewauthors";
+    return "admin/viewauthors";
   }
 
   @RequestMapping(value = "/searchAuthors", method = RequestMethod.GET)
@@ -149,7 +149,7 @@ public class AdminController {
     if (title == null) {
       model.addAttribute("book", service.getBookById(id));
 
-      return "editbook";
+      return "admin/editbook";
     }
     else {
       Book book = new Book();
@@ -175,7 +175,7 @@ public class AdminController {
 
       boolean success = service.updateBook(book);
       model.addAttribute("message", success ? "Book Edited Sucessfully" : "Failed to Edit Book");
-      return "viewbooks";
+      return "admin/viewbooks";
     }
   }
 
@@ -186,7 +186,7 @@ public class AdminController {
     Book.setBookId(id);
 
     service.deleteBook(Book);
-    return "viewbooks";
+    return "admin/viewbooks";
   }
 
   @RequestMapping(value = "/searchBooks", method = RequestMethod.GET)
@@ -250,7 +250,7 @@ public class AdminController {
 
     boolean success = service.createPublisher(publisher);
     model.addAttribute("message", success ? "Publisher Added Sucessfully" : "Failed to Add Publisher");
-    return "publishers";
+    return "removed/publishers";
   }
 
   @RequestMapping(value = "/editPublisher", method = {RequestMethod.GET, RequestMethod.POST})
@@ -259,7 +259,7 @@ public class AdminController {
                               @RequestParam(value = "phone", required = false) String phone) {
     if (name == null) {
       model.addAttribute("publisher", service.getPublisherById(id));
-      return "editpublisher";
+      return "admin/editpublisher";
     }
     else {
       model.addAttribute("service", service);
@@ -271,7 +271,7 @@ public class AdminController {
 
       boolean success = service.updatePublisher(publisher);
       model.addAttribute("message", success ? "Publisher Edited Sucessfully" : "Failed to Edit Publisher");
-      return "viewpublishers";
+      return "admin/viewpublishers";
     }
   }
 
@@ -282,7 +282,7 @@ public class AdminController {
     publisher.setPublisherId(id);
 
     service.deletePublisher(publisher);
-    return "viewpublishers";
+    return "admin/viewpublishers";
   }
 
   @RequestMapping(value = "/searchPublishers", method = RequestMethod.GET)
@@ -338,7 +338,7 @@ public class AdminController {
                            @RequestParam(value = "phone", required = false) String phone, @RequestParam(value = "forward", required = false) String forward) {
     if (name == null) {
       model.addAttribute("branch", service.getBranchById(id));
-      return "editbranch";
+      return "admin/editbranch";
     }
     else {
       model.addAttribute("service", service);
@@ -350,9 +350,9 @@ public class AdminController {
       boolean success = service.updateBranch(libraryBranch);
       model.addAttribute("message", success ? "LibraryBranch Edited Sucessfully" : "Failed to Edit LibraryBranch");
       if (forward.equals(""))
-        return "viewbranches";
+        return "admin/viewbranches";
       else
-        return "choosebranch";
+        return "librarian/choosebranch";
     }
   }
 
@@ -363,7 +363,7 @@ public class AdminController {
     libraryBranch.setBranchId(id);
 
     service.deleteBranch(libraryBranch);
-    return "viewbranches";
+    return "admin/viewbranches";
   }
 
   @RequestMapping(value = "/searchBranches", method = RequestMethod.GET)
@@ -419,7 +419,7 @@ public class AdminController {
                              @RequestParam(value = "phone", required = false) String phone) {
     if (name == null) {
       model.addAttribute("borrower", service.getBorrowerById(id));
-      return "editborrower";
+      return "admin/editborrower";
     }
     else {
       model.addAttribute("service", service);
@@ -431,7 +431,7 @@ public class AdminController {
 
       boolean success = service.updateBorrower(borrower);
       model.addAttribute("message", success ? "Borrower Edited Sucessfully" : "Failed to Edit Borrower");
-      return "viewborrowers";
+      return "admin/viewborrowers";
     }
   }
 
@@ -442,7 +442,7 @@ public class AdminController {
     borrower.setCardNo(id);
 
     service.deleteBorrower(borrower);
-    return "viewborrowers";
+    return "admin/viewborrowers";
   }
 
   @RequestMapping(value = "/searchBorrowers", method = RequestMethod.GET)
@@ -497,7 +497,7 @@ public class AdminController {
     bookLoan.setDateOut(dateOut);
     bookLoan.setDueDate(dueDate);
     model.addAttribute("loan", bookLoan);
-    return "overrideloan";
+    return "admin/overrideloan";
   }
 
   @RequestMapping(value = "/override", method = {RequestMethod.GET, RequestMethod.POST})
@@ -523,7 +523,7 @@ public class AdminController {
     boolean success = service.updateLoan(bookLoan);
     model.addAttribute("message", success ? "Overridden BookLoan Sucessfully" : "Failed to Override BookLoan");
     model.addAttribute("service", service);
-    return "loans";
+    return "admin/loans";
   }
 
   @RequestMapping(value = "/searchLoans", method = RequestMethod.GET)

@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.Publisher" %>
+<%@ page import="com.gcit.lms.domain.BookLoan" %>
 <%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
     AdminService service = (AdminService) request.getAttribute("service");
-    int count = service.getPublishersCount();
+    int count = service.getLoansCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<Publisher> lst = service.getAllPublishers(1, 5);
+    List<BookLoan> lst = service.getAllLoans(1, 5);
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
     function search() {
         $.ajax({
-            url: "searchPublishers",
+            url: "searchLoans",
             data: {
                 searchString: $('#searchString').val()
             }
@@ -29,7 +29,7 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pagePublishers",
+            url: "pageLoans",
             data: {
                 searchString: $('#searchString').val(),
                 pageNo: page
@@ -43,37 +43,40 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Publishers</h1>
+        <h1>View Existing Book Loans</h1>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter publisher name to search"> <input
+               placeholder="Enter due date to search"> <input
             type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th>Borrower Name</th>
+                <th>Book Title</th>
+                <th>Branch Name</th>
+                <th>Branch Address</th>
+                <th>Date Out</th>
+                <th>Due Date</th>
             </tr>
             <%
-                for (Publisher p : lst) {
+                for (BookLoan l : lst) {
             %>
             <tr>
-                <td><%=p.getPublisherName()%>
+                <td><%=l.getBorrower().getName()%>
                 </td>
-                <td><%=p.getPublisherAddress()%>
+                <td><%=l.getBook().getTitle()%>
                 </td>
-                <td><%=p.getPublisherPhone() != null ? p.getPublisherPhone() : ""%>
+                <td><%=l.getLibraryBranch().getBranchName()%>
+                </td>
+                <td><%=l.getLibraryBranch().getBranchAddress()%>
+                </td>
+                <td><%=l.getDateOut().toString()%>
+                </td>
+                <td><%=l.getDueDate().toString()%>
                 </td>
                 <td>
-                    <button type="button"
-                            class="btn btn btn-default" data-toggle="modal"
-                            data-target="#myModal1"
-                            href="editPublisher?id=<%=p.getPublisherId()%>">EDIT
-                    </button>
-                </td>
-                <td align="center">
-                    <button type="button"
-                            class="btn btn btn-primary"
-                            onclick="location.href='deletePublisher?id=<%=p.getPublisherId()%>'">DELETE
+                    <button type="button" class="btn btn btn-default"
+                            data-toggle="modal" data-target="#myModal1"
+                            href="overrideloan?bookId=<%=l.getBook().getBookId()%>&branchId=<%=l.getLibraryBranch().getBranchId()%>&cardNo=<%=l.getBorrower().getCardNo()%>&dateOut=<%=l.getDateOut().toString()%>&dueDate=<%=l.getDueDate().toString()%>">
+                        OVERRIDE
                     </button>
                 </td>
             </tr>
@@ -96,7 +99,6 @@
         <p>${message}</p>
     </div>
 </div>
-
 <div id="myModal1" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg">

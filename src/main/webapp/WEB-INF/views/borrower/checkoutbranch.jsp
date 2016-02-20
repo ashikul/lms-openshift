@@ -5,21 +5,20 @@
 <%@ page import="java.util.List" %>
 <%
     BorrowerService service = (BorrowerService) request.getAttribute("service");
-    int cardNo = Integer.parseInt(request.getParameter("cardNo"));
-    int count = service.getBranchesByCardNoCount(cardNo);
+    int count = service.getBranchesCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<LibraryBranch> lst = service.getAllBranchesByCardNo(cardNo);
+    List<LibraryBranch> libraryBranches = service.getAllBranches(1, 5);
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     function search() {
         $.ajax({
-            url: "searchCheckinBranches",
+            url: "searchCheckoutBranches",
             data: {
                 searchString: $('#searchString').val(),
-                cardNo: <%= cardNo %>
+                cardNo: <%= request.getParameter("cardNo") %>
             }
         }).done(function (data) {
             $('.pagination').html(data);
@@ -28,11 +27,11 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageCheckinBranches",
+            url: "pageCheckoutBranches",
             data: {
                 searchString: $('#searchString').val(),
                 pageNo: page,
-                cardNo: <%= cardNo %>
+                cardNo: <%= request.getParameter("cardNo") %>
             }
         }).done(function (data) {
             $('.table').html(data);
@@ -54,16 +53,16 @@
                 <th>Address</th>
             </tr>
             <%
-                for (LibraryBranch b : lst) {
+                for (LibraryBranch b : libraryBranches) {
             %>
             <tr>
                 <td><%=b.getBranchName()%>
                 </td>
-                <td><%=b.getBranchAddress() != null ? b.getBranchAddress() : ""%>
+                <td><%=b.getBranchAddress()%>
                 </td>
                 <td>
                     <button type="button" class="btn btn btn-info"
-                            onclick="location.href='checkinbook?cardNo=<%=request.getParameter("cardNo")%>&branchId=<%=b.getBranchId()%>'">
+                            onclick="location.href='checkoutbook?cardNo=<%=request.getParameter("cardNo")%>&branchId=<%=b.getBranchId()%>'">
                         Choose
                     </button>
                 </td>

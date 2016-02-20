@@ -3,17 +3,17 @@
 <%@ page import="com.gcit.lms.domain.Author" %>
 <%@ page import="com.gcit.lms.domain.Book" %>
 <%@ page import="com.gcit.lms.domain.Genre" %>
-<%@ page import="com.gcit.lms.service.BorrowerService" %>
+<%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
-    BorrowerService service = (BorrowerService) request.getAttribute("service");
-    int branchId = Integer.parseInt(request.getParameter("branchId"));
-    int count = service.getBooksCountByBranchId(branchId);
+    AdminService service = (AdminService) request.getAttribute("service");
+    int count = service.getBooksCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
+
     int maxBook = 0;
     int maxGenre = 0;
-    List<Book> books = service.getAllBooksByBranchId(branchId, 1, 5);
+    List<Book> books = service.getAllBooks(1, 5);
 
     for (Book b : books) {
         if (maxBook < b.getAuthors().size())
@@ -22,15 +22,16 @@
             maxGenre = b.getGenres().size();
     }
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
     function search() {
         $.ajax({
-            url: "searchCheckoutBooks",
+            url: "searchBooks",
             data: {
-                searchString: $('#searchString').val(),
-                cardNo: <%= request.getParameter("cardNo") %>,
-                branchId: <%= branchId %>
+                searchString: $('#searchString').val()
             }
         }).done(function (data) {
             $('.pagination').html(data);
@@ -39,12 +40,10 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageCheckoutBooks",
+            url: "pageBooks",
             data: {
                 searchString: $('#searchString').val(),
-                pageNo: page,
-                cardNo: <%= request.getParameter("cardNo") %>,
-                branchId: <%= branchId %>
+                pageNo: page
             }
         }).done(function (data) {
             $('.table').html(data);
@@ -56,9 +55,8 @@
 
     <div class="jumbotron">
         <h1>View Existing Books</h1>
-        <h2>Pick the Book you want to check out</h2>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter book title to search"> <input
+               placeholder="Enter title name to search"> <input
             type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>
@@ -106,14 +104,20 @@
                     }
                 %>
                 <td>
-                    <button type="button"
-                            class="btn btn btn-info"
-                            onclick="location.href='checkout?cardNo=<%=request.getParameter("cardNo")%>&branchId=<%=request.getParameter("branchId")%>&bookId=<%=b.getBookId()%>'">
-                        Choose
+                    <button type="button" class="btn btn btn-default"
+                            data-toggle="modal" data-target="#myModal1"
+                            href="editBook?bookId=<%=b.getBookId()%>">EDIT
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn btn-primary"
+                            onclick="location.href='deleteBook?bookId=<%=b.getBookId()%>'">DELETE
                     </button>
                 </td>
             </tr>
-            <%} %>
+            <%
+                }
+            %>
         </table>
         <nav>
             <ul class="pagination">
@@ -127,5 +131,13 @@
                 %>
             </ul>
         </nav>
+        <p>${message}</p>
+    </div>
+</div>
+
+<div id="myModal1" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content"></div>
     </div>
 </div>

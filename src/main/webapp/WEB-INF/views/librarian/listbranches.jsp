@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="com.gcit.lms.domain.LibraryBranch" %>
-<%@ page import="com.gcit.lms.service.BorrowerService" %>
+<%@ page import="com.gcit.lms.service.LibrarianService" %>
 <%@ page import="java.util.List" %>
 <%
-    BorrowerService service = (BorrowerService) request.getAttribute("service");
+    LibrarianService service = (LibrarianService) request.getAttribute("service");
     int count = service.getBranchesCount();
     int pages = count / 5;
-    if (count % 5 != 0) pages++;
+    if (count % 5 != 0)
+        pages++;
 
-    List<LibraryBranch> libraryBranches = service.getAllBranches(1, 5);
+    List<LibraryBranch> lst = service.getAllBranches(1, 5);
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     function search() {
         $.ajax({
-            url: "searchCheckoutBranches",
+            url: "searchLibBranches",
             data: {
-                searchString: $('#searchString').val(),
-                cardNo: <%= request.getParameter("cardNo") %>
+                searchString: $('#searchString').val()
             }
         }).done(function (data) {
             $('.pagination').html(data);
@@ -27,11 +27,10 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageCheckoutBranches",
+            url: "pageLibBranches",
             data: {
                 searchString: $('#searchString').val(),
-                pageNo: page,
-                cardNo: <%= request.getParameter("cardNo") %>
+                pageNo: page
             }
         }).done(function (data) {
             $('.table').html(data);
@@ -43,17 +42,17 @@
 
     <div class="jumbotron">
         <h1>View Existing Branches</h1>
-        <h2>Pick the Branch you want to check out from</h2>
         <input type="text" class="col-md-4" id="searchString"
                placeholder="Enter libraryBranch name to search"> <input
             type="button" value="Search" onclick="search();">
+        <h2>Choose Branch you manage:</h2>
         <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Address</th>
             </tr>
             <%
-                for (LibraryBranch b : libraryBranches) {
+                for (LibraryBranch b : lst) {
             %>
             <tr>
                 <td><%=b.getBranchName()%>
@@ -62,7 +61,7 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn btn-info"
-                            onclick="location.href='checkoutbook?cardNo=<%=request.getParameter("cardNo")%>&branchId=<%=b.getBranchId()%>'">
+                            onclick="location.href='choosebranch?id=<%=b.getBranchId()%>&name=<%=b.getBranchName()%>&address=<%=b.getBranchAddress()%>'">
                         Choose
                     </button>
                 </td>

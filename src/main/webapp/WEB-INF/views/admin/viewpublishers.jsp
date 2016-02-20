@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.Borrower" %>
+<%@ page import="com.gcit.lms.domain.Publisher" %>
 <%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
     AdminService service = (AdminService) request.getAttribute("service");
-    int count = service.getBorrowersCount();
+    int count = service.getPublishersCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<Borrower> lst = service.getAllBorrowers(1, 5);
+    List<Publisher> lst = service.getAllPublishers(1, 5);
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
     function search() {
         $.ajax({
-            url: "searchBorrowers",
+            url: "searchPublishers",
             data: {
                 searchString: $('#searchString').val()
             }
@@ -29,7 +29,7 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageBorrowers",
+            url: "pagePublishers",
             data: {
                 searchString: $('#searchString').val(),
                 pageNo: page
@@ -43,9 +43,9 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Borrowers</h1>
+        <h1>View Existing Publishers</h1>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter borrower name to search"> <input
+               placeholder="Enter publisher name to search"> <input
             type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>
@@ -54,31 +54,32 @@
                 <th>Phone</th>
             </tr>
             <%
-                for (Borrower b : lst) {
+                for (Publisher p : lst) {
             %>
             <tr>
-                <td><%=b.getName()%>
+                <td><%=p.getPublisherName()%>
                 </td>
-                <td><%=b.getAddress()%>
+                <td><%=p.getPublisherAddress()%>
                 </td>
-                <td><%=b.getPhone() != null ? b.getPhone() : ""%>
+                <td><%=p.getPublisherPhone() != null ? p.getPublisherPhone() : ""%>
                 </td>
                 <td>
-                    <button type="button" class="btn btn btn-default"
-                            data-toggle="modal" data-target="#myModal1"
-                            href="editBorrower?id=<%=b.getCardNo()%>">EDIT
+                    <button type="button"
+                            class="btn btn btn-default" data-toggle="modal"
+                            data-target="#myModal1"
+                            href="editPublisher?id=<%=p.getPublisherId()%>">EDIT
                     </button>
                 </td>
-                <td>
-                    <button type="button" class="btn btn btn-primary"
-                            onclick="location.href='deleteBorrower?id=<%=b.getCardNo()%>'">DELETE
+                <td align="center">
+                    <button type="button"
+                            class="btn btn btn-primary"
+                            onclick="location.href='deletePublisher?id=<%=p.getPublisherId()%>'">DELETE
                     </button>
                 </td>
             </tr>
             <%
                 }
             %>
-
         </table>
         <nav>
             <ul class="pagination">

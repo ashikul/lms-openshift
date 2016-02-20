@@ -1,4 +1,4 @@
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <div class="container theme-showcase" role="main">
 
     <div class="jumbotron">
@@ -7,7 +7,7 @@
         <ul class="nav nav-pills nav-stacked">
             <li><a href="addpublisher">Add Publisher</a></li>
             <li><a href="viewpublishers">View Publishers</a></li>
-            <li><a href="admin">Quit to previous</a></li>
+            <li><a href="../admin">Quit to previous</a></li>
         </ul>
         <p>${message}</p>
     </div>

@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-9">
-                <h1>Welcome to the GCIT Library Management System3</h1>
+                <h1>Welcome to the GCIT Library Management System</h1>
             </div>
             <div class="col-sm-3">
                 <img

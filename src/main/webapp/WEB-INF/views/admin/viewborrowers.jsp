@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.Author" %>
+<%@ page import="com.gcit.lms.domain.Borrower" %>
 <%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
     AdminService service = (AdminService) request.getAttribute("service");
-    int count = service.getAuthorsCount();
+    int count = service.getBorrowersCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<Author> authors = service.getAllAuthors(1, 5);
+    List<Borrower> lst = service.getAllBorrowers(1, 5);
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
     function search() {
         $.ajax({
-            url: "searchAuthors",
+            url: "searchBorrowers",
             data: {
                 searchString: $('#searchString').val()
             }
@@ -29,7 +29,7 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageAuthors",
+            url: "pageBorrowers",
             data: {
                 searchString: $('#searchString').val(),
                 pageNo: page
@@ -43,53 +43,42 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Authors</h1>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <input type="text" class="col-md-4" id="searchString"
-                           placeholder="Enter author name to search"> <input
-                        type="button" value="Search" onclick="search();">
-
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn btn-info"
-                            data-toggle="modal" data-target="#myModal1"
-                            href="addAuthor">ADD
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
+        <h1>View Existing Borrowers</h1>
+        <input type="text" class="col-md-4" id="searchString"
+               placeholder="Enter borrower name to search"> <input
+            type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>
                 <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
             </tr>
             <%
-                for (Author a : authors) {
+                for (Borrower b : lst) {
             %>
             <tr>
-                <td><%=a.getAuthorName()%>
+                <td><%=b.getName()%>
+                </td>
+                <td><%=b.getAddress()%>
+                </td>
+                <td><%=b.getPhone() != null ? b.getPhone() : ""%>
                 </td>
                 <td>
                     <button type="button" class="btn btn btn-default"
                             data-toggle="modal" data-target="#myModal1"
-                            href="editAuthor?authorId=<%=a.getAuthorId()%>">EDIT
+                            href="editBorrower?id=<%=b.getCardNo()%>">EDIT
                     </button>
                 </td>
                 <td>
                     <button type="button" class="btn btn btn-primary"
-                            onclick="location.href='deleteAuthor?authorId=<%=a.getAuthorId()%>'">DELETE
+                            onclick="location.href='deleteBorrower?id=<%=b.getCardNo()%>'">DELETE
                     </button>
                 </td>
             </tr>
             <%
                 }
             %>
+
         </table>
         <nav>
             <ul class="pagination">
@@ -113,9 +102,3 @@
         <div class="modal-content"></div>
     </div>
 </div>
-<%--<div id="myModal2" class="modal fade" tabindex="-1" role="dialog"--%>
-<%--aria-labelledby="myLargeModalLabel">--%>
-<%--<div class="modal-dialog modal-lg">--%>
-<%--<div class="modal-content"></div>--%>
-<%--</div>--%>
-<%--</div>--%>

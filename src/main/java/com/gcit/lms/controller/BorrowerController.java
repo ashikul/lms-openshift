@@ -58,7 +58,7 @@ public class BorrowerController {
 
     boolean success = service.checkout(bookLoan);
     model.addAttribute("message", success ? "Check-out Successfully" : "Failed to Check-out");
-    return "signin";
+    return "borrower/signin";
   }
 
   @RequestMapping(value = "/searchCheckoutBranches", method = RequestMethod.GET)
@@ -162,7 +162,7 @@ public class BorrowerController {
 
     boolean success = service.checkin(bookLoan);
     model.addAttribute("message", success ? "Check-in Successfully" : "Failed to Check-in");
-    return "signin";
+    return "borrower/signin";
   }
 
   @RequestMapping(value = "/searchCheckinBranches", method = RequestMethod.GET)

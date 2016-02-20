@@ -37,17 +37,17 @@ public class HomeController {
   /*Menu*/
   @RequestMapping(value = "/admin", method = RequestMethod.GET)
   public String admin(Locale locale, Model model) {
-    return "admin";
+    return "admin/admin";
   }
 
   @RequestMapping(value = "/librarian", method = RequestMethod.GET)
   public String librarian(Locale locale, Model model) {
-    return "librarian";
+    return "librarian/librarian";
   }
 
   @RequestMapping(value = "/checkcard", method = RequestMethod.GET)
   public String checkCard(Locale locale, Model model) {
-    return "checkcard";
+    return "borrower/checkcard";
   }
 
   /*Author*/
@@ -64,7 +64,7 @@ public class HomeController {
   @RequestMapping(value = "/viewauthors", method = RequestMethod.GET)
   public String viewAuthors(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "viewauthors";
+    return "admin/viewauthors";
   }
 
   /*Book*/
@@ -82,13 +82,13 @@ public class HomeController {
   @RequestMapping(value = "/viewbooks", method = RequestMethod.GET)
   public String viewBooks(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "viewbooks";
+    return "admin/viewbooks";
   }
 
   /*Publisher*/
   @RequestMapping(value = "/publishers", method = RequestMethod.GET)
   public String publishers(Locale locale, Model model) {
-    return "publishers";
+    return "removed/publishers";
   }
 
   @RequestMapping(value = "/addpublisher", method = RequestMethod.GET)
@@ -100,7 +100,7 @@ public class HomeController {
   @RequestMapping(value = "/viewpublishers", method = RequestMethod.GET)
   public String viewPublishers(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "viewpublishers";
+    return "admin/viewpublishers";
   }
 
   /*LibraryBranch*/
@@ -118,7 +118,7 @@ public class HomeController {
   @RequestMapping(value = "/viewbranches", method = RequestMethod.GET)
   public String viewBranches(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "viewbranches";
+    return "admin/viewbranches";
   }
 
   /*Borrower*/
@@ -136,62 +136,62 @@ public class HomeController {
   @RequestMapping(value = "/viewborrowers", method = RequestMethod.GET)
   public String viewBorrowers(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "viewborrowers";
+    return "admin/viewborrowers";
   }
 
   /*BookLoan*/
   @RequestMapping(value = "/loans", method = RequestMethod.GET)
   public String loans(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "loans";
+    return "admin/loans";
   }
 
   /*Lib*/
   @RequestMapping(value = "/listbranches", method = RequestMethod.GET)
   public String listBranches(Locale locale, Model model) {
     model.addAttribute("service", libService);
-    return "listbranches";
+    return "librarian/listbranches";
   }
 
   @RequestMapping(value = "/choosebranch", method = RequestMethod.GET)
   public String chooseBranch(Locale locale, Model model) {
-    return "choosebranch";
+    return "librarian/choosebranch";
   }
 
   @RequestMapping(value = "/listbooks", method = RequestMethod.GET)
   public String listBooks(Locale locale, Model model) {
     model.addAttribute("service", libService);
-    return "listbooks";
+    return "librarian/listbooks";
   }
 
   /*Borrower*/
   @RequestMapping(value = "/signin", method = RequestMethod.GET)
   public String signin(Locale locale, Model model) {
     model.addAttribute("service", libService);
-    return "signin";
+    return "borrower/signin";
   }
 
   @RequestMapping(value = "/checkoutbranch", method = RequestMethod.GET)
   public String checkoutBranch(Locale locale, Model model) {
     model.addAttribute("service", borrowerService);
-    return "checkoutbranch";
+    return "borrower/checkoutbranch";
   }
 
   @RequestMapping(value = "/checkoutbook", method = RequestMethod.GET)
   public String checkoutBook(Locale locale, Model model) {
     model.addAttribute("service", borrowerService);
-    return "checkoutbook";
+    return "borrower/checkoutbook";
   }
 
   @RequestMapping(value = "/checkinbranch", method = RequestMethod.GET)
   public String checkinBranch(Locale locale, Model model) {
     model.addAttribute("service", borrowerService);
-    return "checkinbranch";
+    return "borrower/checkinbranch";
   }
 
   @RequestMapping(value = "/checkinbook", method = RequestMethod.GET)
   public String checkinBook(Locale locale, Model model) {
     model.addAttribute("service", borrowerService);
-    return "checkinbook";
+    return "borrower/checkinbook";
   }
 }

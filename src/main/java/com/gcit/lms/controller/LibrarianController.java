@@ -115,7 +115,7 @@ public class LibrarianController {
       c.setLibraryBranch(service.getBranchById(branchId));
     }
     model.addAttribute("copies", c);
-    return "choosebook";
+    return "librarian/choosebook";
   }
 
   @RequestMapping(value = "/updateCopies", method = RequestMethod.POST)
@@ -147,6 +147,6 @@ public class LibrarianController {
       model.addAttribute("message", success ? "BookCopies Updated Sucessfully" : "Failed to Update BookCopies");
       model.addAttribute("service", service);
     }
-    return "listbooks";
+    return "librarian/listbooks";
   }
 }

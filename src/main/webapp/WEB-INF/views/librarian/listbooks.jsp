@@ -23,7 +23,7 @@
             maxGenre = b.getGenres().size();
     }
 %>
-<%@include file="header.html" %>
+<%@include file="../header.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
