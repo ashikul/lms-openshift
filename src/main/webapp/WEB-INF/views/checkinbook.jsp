@@ -54,7 +54,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Books</h1>
         <h2>Pick the Book you want to check out</h2>

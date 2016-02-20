@@ -41,7 +41,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Publishers</h1>
         <input type="text" class="col-md-4" id="searchString"
@@ -65,14 +65,14 @@
                 </td>
                 <td>
                     <button type="button"
-                            class="btn btn btn-primary" data-toggle="modal"
+                            class="btn btn btn-default" data-toggle="modal"
                             data-target="#myModal1"
                             href="editPublisher?id=<%=p.getPublisherId()%>">EDIT
                     </button>
                 </td>
                 <td align="center">
                     <button type="button"
-                            class="btn btn btn-danger"
+                            class="btn btn btn-primary"
                             onclick="location.href='deletePublisher?id=<%=p.getPublisherId()%>'">DELETE
                     </button>
                 </td>

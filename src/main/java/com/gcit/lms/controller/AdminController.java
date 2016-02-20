@@ -138,7 +138,7 @@ public class AdminController {
 
     boolean success = service.createBook(book);
     model.addAttribute("message", success ? "Book Added Sucessfully" : "Failed to Add Book");
-    return "books";
+    return "removed/books";
   }
 
   @RequestMapping(value = "/editBook", method = {RequestMethod.GET, RequestMethod.POST})
@@ -329,7 +329,7 @@ public class AdminController {
 
     boolean success = service.createBranch(libraryBranch);
     model.addAttribute("message", success ? "LibraryBranch Added Sucessfully" : "Failed to Add LibraryBranch");
-    return "branches";
+    return "removed/branches";
   }
 
   @RequestMapping(value = "/editBranch", method = {RequestMethod.GET, RequestMethod.POST})
@@ -410,7 +410,7 @@ public class AdminController {
 
     boolean success = service.createBorrower(borrower);
     model.addAttribute("message", success ? "Borrower Added Sucessfully" : "Failed to Add Borrower");
-    return "borrowers";
+    return "removed/borrowers";
   }
 
   @RequestMapping(value = "/editBorrower", method = {RequestMethod.GET, RequestMethod.POST})

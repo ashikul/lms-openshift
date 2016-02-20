@@ -1,7 +1,7 @@
 <%@include file="header.html" %>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>Welcome Borrower</h1>
         <h2>Your Card Number is: <%=request.getParameter("cardNo")%>

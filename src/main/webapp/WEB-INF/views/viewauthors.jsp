@@ -41,7 +41,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Authors</h1>
 
@@ -54,7 +54,7 @@
 
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn btn-success"
+                    <button type="button" class="btn btn btn-info"
                             data-toggle="modal" data-target="#myModal1"
                             href="addAuthor">ADD
                     </button>
@@ -76,13 +76,13 @@
                 <td><%=a.getAuthorName()%>
                 </td>
                 <td>
-                    <button type="button" class="btn btn btn-primary"
+                    <button type="button" class="btn btn btn-default"
                             data-toggle="modal" data-target="#myModal1"
                             href="editAuthor?authorId=<%=a.getAuthorId()%>">EDIT
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn btn-danger"
+                    <button type="button" class="btn btn btn-primary"
                             onclick="location.href='deleteAuthor?authorId=<%=a.getAuthorId()%>'">DELETE
                     </button>
                 </td>

@@ -40,7 +40,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Branches</h1>
         <h2>Pick the Branch you want to check out from</h2>

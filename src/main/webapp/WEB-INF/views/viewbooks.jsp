@@ -52,7 +52,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Books</h1>
         <input type="text" class="col-md-4" id="searchString"
@@ -104,13 +104,13 @@
                     }
                 %>
                 <td>
-                    <button type="button" class="btn btn btn-primary"
+                    <button type="button" class="btn btn btn-default"
                             data-toggle="modal" data-target="#myModal1"
                             href="editBook?bookId=<%=b.getBookId()%>">EDIT
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn btn-danger"
+                    <button type="button" class="btn btn btn-primary"
                             onclick="location.href='deleteBook?bookId=<%=b.getBookId()%>'">DELETE
                     </button>
                 </td>

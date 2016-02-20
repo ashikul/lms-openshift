@@ -39,7 +39,7 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron">
         <h1>View Existing Branches</h1>
         <input type="text" class="col-md-4" id="searchString"

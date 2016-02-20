@@ -70,7 +70,7 @@ public class HomeController {
   /*Book*/
   @RequestMapping(value = "/books", method = RequestMethod.GET)
   public String books(Locale locale, Model model) {
-    return "books";
+    return "removed/books";
   }
 
   @RequestMapping(value = "/addbook", method = RequestMethod.GET)
@@ -106,7 +106,7 @@ public class HomeController {
   /*LibraryBranch*/
   @RequestMapping(value = "/branches", method = RequestMethod.GET)
   public String branches(Locale locale, Model model) {
-    return "branches";
+    return "removed/branches";
   }
 
   @RequestMapping(value = "/addbranch", method = RequestMethod.GET)
@@ -124,7 +124,7 @@ public class HomeController {
   /*Borrower*/
   @RequestMapping(value = "/borrowers", method = RequestMethod.GET)
   public String borrowers(Locale locale, Model model) {
-    return "borrowers";
+    return "removed/borrowers";
   }
 
   @RequestMapping(value = "/addborrower", method = RequestMethod.GET)
