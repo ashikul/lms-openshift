@@ -41,7 +41,6 @@
 </script>
 <div class="container theme-showcase" role="main">
 
-
     <div class="jumbotron">
         <h1>
             You have chosen Branch:</br>
