@@ -115,6 +115,7 @@ public class HomeController {
 
   @RequestMapping(value = "/choosebranch", method = RequestMethod.GET)
   public String chooseBranch(Locale locale, Model model) {
+    model.addAttribute("service", libService);
     return "librarian/choosebranch";
   }
 
