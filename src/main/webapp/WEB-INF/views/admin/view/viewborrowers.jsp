@@ -11,7 +11,7 @@
 
     List<Borrower> lst = service.getAllBorrowers(1, 5);
 %>
-<%@include file="../navbar.html" %>
+<%@include file="../../navbar.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
@@ -43,7 +43,7 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Borrowers</h1>
+        <h1>Table Borrowers</h1>
         <input type="text" class="col-md-4" id="searchString"
                placeholder="Enter borrower name to search"> <input
             type="button" value="Search" onclick="search();">

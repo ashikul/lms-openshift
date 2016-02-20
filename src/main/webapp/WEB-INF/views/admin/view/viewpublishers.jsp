@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<%@ page import="com.gcit.lms.domain.LibraryBranch" %>
+<%@ page import="com.gcit.lms.domain.Publisher" %>
 <%@ page import="com.gcit.lms.service.AdminService" %>
 <%@ page import="java.util.List" %>
 <%
     AdminService service = (AdminService) request.getAttribute("service");
-    int count = service.getBranchesCount();
+    int count = service.getPublishersCount();
     int pages = count / 5;
     if (count % 5 != 0) pages++;
 
-    List<LibraryBranch> lst = service.getAllBranches(1, 5);
+    List<Publisher> lst = service.getAllPublishers(1, 5);
 %>
-<%@include file="../navbar.html" %>
+<%@include file="../../navbar.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
     });
     function search() {
         $.ajax({
-            url: "searchBranches",
+            url: "searchPublishers",
             data: {
                 searchString: $('#searchString').val()
             }
@@ -29,7 +29,7 @@
     }
     function paging(page) {
         $.ajax({
-            url: "pageBranches",
+            url: "pagePublishers",
             data: {
                 searchString: $('#searchString').val(),
                 pageNo: page
@@ -43,39 +43,43 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Branches</h1>
+        <h1>Table Publishers</h1>
         <input type="text" class="col-md-4" id="searchString"
-               placeholder="Enter libraryBranch name to search"> <input
+               placeholder="Enter publisher name to search"> <input
             type="button" value="Search" onclick="search();">
         <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Address</th>
+                <th>Phone</th>
             </tr>
             <%
-                for (LibraryBranch b : lst) {
+                for (Publisher p : lst) {
             %>
             <tr>
-                <td><%=b.getBranchName()%>
+                <td><%=p.getPublisherName()%>
                 </td>
-                <td><%=b.getBranchAddress() != null ? b.getBranchAddress() : ""%>
+                <td><%=p.getPublisherAddress()%>
+                </td>
+                <td><%=p.getPublisherPhone() != null ? p.getPublisherPhone() : ""%>
                 </td>
                 <td>
-                    <button type="button" class="btn btn btn-default"
-                            data-toggle="modal" data-target="#myModal1"
-                            href="editBranch?id=<%=b.getBranchId()%>">EDIT
+                    <button type="button"
+                            class="btn btn btn-default" data-toggle="modal"
+                            data-target="#myModal1"
+                            href="editPublisher?id=<%=p.getPublisherId()%>">EDIT
                     </button>
                 </td>
-                <td>
-                    <button type="button" class="btn btn btn-primary"
-                            onclick="location.href='deleteBranch?id=<%=b.getBranchId()%>'">DELETE
+                <td align="center">
+                    <button type="button"
+                            class="btn btn btn-primary"
+                            onclick="location.href='deletePublisher?id=<%=p.getPublisherId()%>'">DELETE
                     </button>
                 </td>
             </tr>
             <%
                 }
             %>
-
         </table>
         <nav>
             <ul class="pagination">

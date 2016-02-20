@@ -144,7 +144,7 @@ public class LibrarianController {
     } catch (NumberFormatException e) {
       success = false;
     } finally {
-      model.addAttribute("message", success ? "BookCopies Updated Sucessfully" : "Failed to Update BookCopies");
+      model.addAttribute("message", success ? "BookCopies Updated successfully" : "Failed to Update BookCopies");
       model.addAttribute("service", service);
     }
     return "librarian/listbooks";

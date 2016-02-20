@@ -22,7 +22,7 @@
             maxGenre = b.getGenres().size();
     }
 %>
-<%@include file="../navbar.html" %>
+<%@include file="../../navbar.html" %>
 <script>
     $(document).on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
@@ -54,7 +54,7 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Books</h1>
+        <h1>Table Books</h1>
         <input type="text" class="col-md-4" id="searchString"
                placeholder="Enter title name to search"> <input
             type="button" value="Search" onclick="search();">

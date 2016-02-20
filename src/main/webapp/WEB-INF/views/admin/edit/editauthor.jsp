@@ -1,4 +1,4 @@
-<%@include file="../modalcss.html" %>
+<%@include file="../../modalcss.html" %>
 <div class="jumbotron-modal">
 <h1>Edit Author</h1>
 <h2>Enter Author Details</h2>

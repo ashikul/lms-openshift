@@ -64,7 +64,7 @@ public class HomeController {
   @RequestMapping(value = "/viewauthors", method = RequestMethod.GET)
   public String viewAuthors(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/viewauthors";
+    return "admin/view/viewauthors";
   }
 
   /*Book*/
@@ -76,13 +76,13 @@ public class HomeController {
   @RequestMapping(value = "/addbook", method = RequestMethod.GET)
   public String addBook(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/addbook";
+    return "admin/add/addbook";
   }
 
   @RequestMapping(value = "/viewbooks", method = RequestMethod.GET)
   public String viewBooks(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/viewbooks";
+    return "admin/view/viewbooks";
   }
 
   /*Publisher*/
@@ -94,13 +94,13 @@ public class HomeController {
   @RequestMapping(value = "/addpublisher", method = RequestMethod.GET)
   public String addPublisher(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/addpublisher";
+    return "admin/add/addpublisher";
   }
 
   @RequestMapping(value = "/viewpublishers", method = RequestMethod.GET)
   public String viewPublishers(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/viewpublishers";
+    return "admin/view/viewpublishers";
   }
 
   /*LibraryBranch*/
@@ -112,13 +112,13 @@ public class HomeController {
   @RequestMapping(value = "/addbranch", method = RequestMethod.GET)
   public String addBranch(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/addbranch";
+    return "admin/add/addbranch";
   }
 
   @RequestMapping(value = "/viewbranches", method = RequestMethod.GET)
   public String viewBranches(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/viewbranches";
+    return "admin/view/viewbranches";
   }
 
   /*Borrower*/
@@ -130,20 +130,20 @@ public class HomeController {
   @RequestMapping(value = "/addborrower", method = RequestMethod.GET)
   public String addBorrowers(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/addborrower";
+    return "admin/add/addborrower";
   }
 
   @RequestMapping(value = "/viewborrowers", method = RequestMethod.GET)
   public String viewBorrowers(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/viewborrowers";
+    return "admin/view/viewborrowers";
   }
 
   /*BookLoan*/
   @RequestMapping(value = "/loans", method = RequestMethod.GET)
   public String loans(Locale locale, Model model) {
     model.addAttribute("service", adminService);
-    return "admin/loans";
+    return "admin/view/viewbookloans";
   }
 
   /*Lib*/

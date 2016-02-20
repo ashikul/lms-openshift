@@ -42,7 +42,7 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Branches</h1>
+        <h1>Table Branches</h1>
         <h2>Pick the Branch you want to check out from</h2>
         <input type="text" class="col-md-4" id="searchString"
                placeholder="Enter libraryBranch name to search"> <input

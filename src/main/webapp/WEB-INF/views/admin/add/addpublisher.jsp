@@ -1,4 +1,4 @@
-<%@include file="../navbar.html" %>
+<%@include file="../../navbar.html" %>
 <div class="container theme-showcase" role="main">
 
     <div class="jumbotron">

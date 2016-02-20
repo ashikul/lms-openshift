@@ -41,7 +41,7 @@
 
 
     <div class="jumbotron">
-        <h1>View Existing Branches</h1>
+        <h1>Table Branches</h1>
         <input type="text" class="col-md-4" id="searchString"
                placeholder="Enter libraryBranch name to search"> <input
             type="button" value="Search" onclick="search();">
