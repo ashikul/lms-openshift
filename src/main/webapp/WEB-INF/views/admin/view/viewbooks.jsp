@@ -77,9 +77,8 @@
         <table class="table">
             <tr>
                 <th>Title</th>
-                <th colspan="<%=maxBook%>">Author(s)</th>
+                <th>Author(s)</th>
                 <th>Publisher</th>
-                <th colspan="<%=maxGenre%>">Genre(s)</th>
             </tr>
             <%
                 for (Book b : books) {
@@ -88,38 +87,56 @@
                 <td><%=b.getTitle()%>
                 </td>
                 <%
+
+                    StringBuilder sb = new StringBuilder();
                     for (Author a : b.getAuthors()) {
+                        sb.append(a.getAuthorName() + " ");
+                    }
+//                    sb.deleteCharAt(sb.length()-1);
                 %>
                 <td>
-                    <%=a.getAuthorName()%>
+                    <%=sb.toString()%>
                 </td>
-                <%
-                    }
-                %>
-                <%
-                    for (int i = b.getAuthors().size(); i < maxBook; i++) {
-                %>
-                <td></td>
-                <%
-                    }
-                %>
+                <%--<%--%>
+                <%--}--%>
+                <%--%>--%>
+                <%--<%--%>
+                <%--for (int i = b.getAuthors().size(); i < maxBook; i++) {--%>
+                <%--%>--%>
+                <%--<td></td>--%>
+                <%--<%--%>
+                <%--}--%>
+                <%--%>--%>
                 <td><%=b.getPublisher().getPublisherName()%>
                 </td>
                 <%
+
+                    StringBuilder sb2 = new StringBuilder();
                     for (Genre g : b.getGenres()) {
+                        sb2.append(g.getGenreName() + " ");
+                    }
+//                    sb2.deleteCharAt(sb2.length()-1);
                 %>
-                <td><%=g.getGenreName()%>
+                <td>
+                    <%=sb2.toString()%>
                 </td>
-                <%
-                    }
-                %>
-                <%
-                    for (int i = b.getGenres().size(); i < maxGenre; i++) {
-                %>
-                <td></td>
-                <%
-                    }
-                %>
+
+
+                <%--<%--%>
+                <%--for (Genre g : b.getGenres()) {--%>
+                <%--%>--%>
+                <%--<td><%=g.getGenreName()%>--%>
+                <%--</td>--%>
+                <%--<%--%>
+                <%--}--%>
+                <%--%>--%>
+                <%--<%--%>
+                <%--for (int i = b.getGenres().size(); i < maxGenre; i++) {--%>
+                <%--%>--%>
+                <%--<td></td>--%>
+                <%--<%--%>
+                <%--}--%>
+                <%--%>--%>
                 <td>
                     <button type="button" class="btn btn btn-default"
                             data-toggle="modal" data-target="#myModal1"
