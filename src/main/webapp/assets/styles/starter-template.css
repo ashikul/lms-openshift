@@ -23,3 +23,11 @@ body {
     color: inherit;
     background-color: papayawhip;
 }
+
+.table {
+    margin-top: 10px;
+}
+
+.btn-info {
+    /*padding-bottom: 20px;*/
+}

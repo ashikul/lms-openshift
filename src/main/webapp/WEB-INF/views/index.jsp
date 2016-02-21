@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-12">
-                <h1>GCIT Library Management System</h1>
+                <h1>Library Management System</h1>
             </div>
         </div>
     </div>
