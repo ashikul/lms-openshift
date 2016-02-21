@@ -1,4 +1,5 @@
-<%@include file="../../modalcss.html" %>
+<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="starter-template.css" rel="stylesheet" type="text/css">
 <div class="jumbotron-modal">
 <h1>Edit Branch</h1>
 <h2>Enter New Details</h2>

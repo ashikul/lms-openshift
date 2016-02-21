@@ -51,15 +51,6 @@ public class HomeController {
   }
 
   /*Author*/
-//  @RequestMapping(value = "/authors", method = RequestMethod.GET)
-//  public String authors(Locale locale, Model model) {
-//    return "authors";
-//  }
-
-//  @RequestMapping(value = "/addauthor", method = RequestMethod.GET)
-//  public String addAuthor(Locale locale, Model model) {
-//    return "addauthor";
-//  }
 
   @RequestMapping(value = "/viewauthors", method = RequestMethod.GET)
   public String viewAuthors(Locale locale, Model model) {

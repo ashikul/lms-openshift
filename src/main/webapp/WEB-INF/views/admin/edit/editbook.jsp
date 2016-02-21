@@ -1,4 +1,5 @@
-<%@include file="../../modalcss.html" %>
+<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="starter-template.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="com.gcit.lms.domain.Author" %>

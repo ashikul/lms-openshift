@@ -24,15 +24,6 @@ public class AdminController {
   @Autowired
   AdminService service;
 
-//  @RequestMapping(value = "/addAuthor", method = RequestMethod.POST)
-//  public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName") String name) {
-//    Author author = new Author();
-//    author.setAuthorName(name);
-//
-//    boolean success = service.createAuthor(author);
-//    model.addAttribute("message", success ? "Author Added successfully" : "Failed to Add Author");
-//    return "authors";
-//  }
 
   @RequestMapping(value = "/addAuthor", method = {RequestMethod.GET, RequestMethod.POST})
   public String addAuthor(Locale locale, Model model, @RequestParam(value = "authorName", required = false) String name) {
@@ -110,35 +101,6 @@ public class AdminController {
     }
     return sb.toString();
   }
-
-//  @RequestMapping(value = "/addBook", method = RequestMethod.POST)
-//  public String addBook(Locale locale, Model model, @RequestParam(value = "title") String title,
-//                        @RequestParam(value = "authorId", required = false) String[] authorIds, @RequestParam(value = "pubId") int pubId,
-//                        @RequestParam(value = "genre_id", required = false) String[] genre_ids) {
-//    Book book = new Book();
-//    book.setTitle(title);
-//    List<Author> authors = new ArrayList<Author>();
-//    for (int i = 0; authorIds != null && i < authorIds.length; i++) {
-//      Author a = new Author();
-//      a.setAuthorId(Integer.parseInt(authorIds[i]));
-//      authors.add(a);
-//    }
-//    book.setAuthors(authors);
-//    Publisher borrower = new Publisher();
-//    borrower.setPublisherId(pubId);
-//    book.setPublisher(borrower);
-//    List<Genre> genres = new ArrayList<Genre>();
-//    for (int i = 0; genre_ids != null && i < genre_ids.length; i++) {
-//      Genre g = new Genre();
-//      g.setGenreId(Integer.parseInt(genre_ids[i]));
-//      genres.add(g);
-//    }
-//    book.setGenres(genres);
-//
-//    boolean success = service.createBook(book);
-//    model.addAttribute("message", success ? "Book Added successfully" : "Failed to Add Book");
-//    return "removed/books";
-//  }
 
 
   @RequestMapping(value = "/addBook", method = {RequestMethod.GET, RequestMethod.POST})
@@ -276,18 +238,6 @@ public class AdminController {
     return sb.toString();
   }
 
-//  @RequestMapping(value = "/addPublisher", method = RequestMethod.POST)
-//  public String addPublisher(Locale locale, Model model, @RequestParam(value = "name") String name,
-//                             @RequestParam(value = "address") String address, @RequestParam(value = "phone") String phone) {
-//    Publisher publisher = new Publisher();
-//    publisher.setPublisherName(name);
-//    publisher.setPublisherAddress(address);
-//    publisher.setPublisherPhone(phone);
-//
-//    boolean success = service.createPublisher(publisher);
-//    model.addAttribute("message", success ? "Publisher Added successfully" : "Failed to Add Publisher");
-//    return "removed/publishers";
-//  }
 
   @RequestMapping(value = "/addPublisher", method = {RequestMethod.GET, RequestMethod.POST})
   public String addPublisher(Locale locale, Model model, @RequestParam(value = "name", required = false) String name,
@@ -375,17 +325,6 @@ public class AdminController {
     return sb.toString();
   }
 
-//  @RequestMapping(value = "/addBranch", {RequestMethod.GET, RequestMethod.POST})
-//  public String addBranch(Locale locale, Model model, @RequestParam(value = "name") String name,
-//                          @RequestParam(value = "address") String address) {
-//    LibraryBranch libraryBranch = new LibraryBranch();
-//    libraryBranch.setBranchName(name);
-//    libraryBranch.setBranchAddress(address);
-//
-//    boolean success = service.createBranch(libraryBranch);
-//    model.addAttribute("message", success ? "LibraryBranch Added successfully" : "Failed to Add LibraryBranch");
-//    return "removed/branches";
-//  }
 
   @RequestMapping(value = "/addBranch", method = {RequestMethod.GET, RequestMethod.POST})
   public String addBranch(Locale locale, Model model, @RequestParam(value = "name", required = false) String name,
