@@ -18,7 +18,7 @@
             url: "searchCheckoutBranches",
             data: {
                 searchString: $('#searchString').val(),
-                cardNo: <%= request.getParameter("cardNo") %>
+                cardNo: <%=request.getParameter("cardNo")%>
             }
         }).done(function (data) {
             $('.pagination').html(data);

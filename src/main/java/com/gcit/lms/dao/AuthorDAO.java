@@ -26,6 +26,8 @@ public class AuthorDAO extends BaseDAO implements ResultSetExtractor<List<Author
   public void deleteAuthor(Author author) {
     template.update("delete from tbl_author where authorId = ?",
         author.getAuthorId());
+    template.update("delete from tbl_book_authors where authorId = ?",
+        author.getAuthorId());
   }
 
   public List<Author> getAllAuthors(int pageNo, int pageSize) {
