@@ -14,16 +14,11 @@
                     easy-to-operate search interfaces. With the most advanced Java Spring and MySQL technology,
                     unbeatable customer service, and a one-time purchase philosophy we invite you to check us out and
                     find out why thousands of libraries have made the switch to LMS.</h3>
+                <h3><a href="https://github.com/ashikul/lms" target='_blank'>By Ashikul
+                </a></h3>
             </div>
         </div>
-        <%--<div class="list-group col-sm-6">--%>
-        <%--<a href="#" class="list-group-item active">--%>
-        <%--About--%>
-        <%--</a>--%>
-        <%--<a href="#" class="list-group-item">JSP</a>--%>
-        <%--<a href="#" class="list-group-item">Spring</a>--%>
-        <%--<a href="#" class="list-group-item">JSP, Spring, MySQL</a>--%>
-        <%--<a href="#" class="list-group-item"></a>--%>
+
     </div>
     </div>
 </div>
