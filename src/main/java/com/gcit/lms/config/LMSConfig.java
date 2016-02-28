@@ -22,7 +22,16 @@ public class LMSConfig {
 //  private static String pwd = "root";
 
   private static String driver = "com.mysql.jdbc.Driver";
-  private static String url = "jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/";
+//  private static String url = "jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/";
+//  private static String url = "jdbc:mysql://127.12.97.2:3306/lms";
+
+
+  private static String url = "jdbc:mysql://"
+      + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")
+      + ":"
+      + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT")
+      + "/lms";
+
   private static String username = "admina7BP5Md";
   private static String pwd = "4FMMTIgjNRIZ";
 
