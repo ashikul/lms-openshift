@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-12">
-                <h1>Library Management System - Production</h1>
+                <h1>Library Management System - Production - Openshift</h1>
                 <h3>LMS is a software solution designed to accommodate the needs of every library-no matter the size or
                     desired configuration. Our software includes advanced utilities to help you effectively manage
                     circulation, patron records, item reports, and catalog information.</h3>
