@@ -16,10 +16,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 public class LMSConfig {
 
+//  private static String driver = "com.mysql.jdbc.Driver";
+//  private static String url = "jdbc:mysql://localhost:3306/library";
+//  private static String username = "root";
+//  private static String pwd = "root";
+
   private static String driver = "com.mysql.jdbc.Driver";
-  private static String url = "jdbc:mysql://localhost:3306/library";
-  private static String username = "root";
-  private static String pwd = "root";
+  private static String url = "jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/";
+  private static String username = "admina7BP5Md";
+  private static String pwd = "4FMMTIgjNRIZ";
 
   /* Add Services */
   @Bean
