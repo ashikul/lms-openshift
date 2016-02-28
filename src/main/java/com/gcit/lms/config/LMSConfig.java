@@ -30,7 +30,7 @@ public class LMSConfig {
       + System.getenv().get("OPENSHIFT_MYSQL_DB_HOST")
       + ":"
       + System.getenv().get("OPENSHIFT_MYSQL_DB_PORT")
-      + "/lms";
+      + "/library";
 
   private static String username = "admina7BP5Md";
   private static String pwd = "4FMMTIgjNRIZ";
