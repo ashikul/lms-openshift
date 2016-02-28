@@ -1,6 +1,8 @@
 # Library Management System Project
 GCIT LMS
 
+demo: lms-ashikul.rhcloud.com
+
 Frontend: JSP, HTML, CSS, Javascript, JQuery, Bootstrap
 
 Backend: Spring
